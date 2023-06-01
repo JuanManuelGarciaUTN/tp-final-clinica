@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "clinica-tp-final": {
+      "hosting": {
+        "tp-clinica-final": [
+          "clinica-tp-final"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "clinica-tp-final"
+  }
+}
