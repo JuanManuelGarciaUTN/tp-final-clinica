@@ -1,0 +1,25 @@
+.nav-link:hover {
+    background-color: #2736df; 
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; 
+}
+
+.navbar{
+    border-bottom: 1px solid black;
+}
+
+.nav-link{
+    font-size: 18px;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+img{
+    margin-right: 8px;
+}
