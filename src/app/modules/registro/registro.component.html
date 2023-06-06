@@ -1,11 +1,11 @@
-<form class="login-form" [formGroup]="formularioRegistro" (ngSubmit)="generarUsuario()">
+<form class="login-form" [formGroup]="formularioRegistro">
     <h3>Registro</h3>
     <div class="opciones-usuario">
         <button class="opcion" [ngClass]="{activo: tipo == 'paciente'}" (click)="setPaciente()">Paciente</button>
         <button class="opcion" [ngClass]="{activo: tipo == 'especialista'}" (click)="setEspecialista()">Especialista</button>
         <button class="opcion" [ngClass]="{activo: tipo == 'admin'}" (click)="setAdmin()">Admin</button>
     </div>
-    <div class="datos">
+    <div class="datos" *ngIf="tipo != ''">
         <div class="form-group" >
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" placeholder="Ingrese nombre" formControlName="nombre" (input)="formatearLetras(formularioRegistro.get('nombre'))">
@@ -30,7 +30,7 @@
         <div class="form-group" *ngIf="tipo == 'paciente'">
             <label for="apellido">Obra Social</label>
             <input type="text" id="obraSocial" placeholder="Ingrese obra social" formControlName="obraSocial">
-            <small *ngIf="formularioRegistro.get('obraSocial')?.touched && !formularioRegistro.get('obraSocial')?.valid"> 
+            <small *ngIf="obraSocialControl && obraSocialControl.touched && !obraSocialControl.valid"> 
                 Debe Ingresar Una Obra Social
             </small>
         </div>
@@ -67,28 +67,26 @@
         </div>
         <div class="form-group">
             <label for="imagen1">Imagen Perfil</label>
-            <input type="file" accept="image/*" placeholder="Imagen Perfil" id="imagen1" formControlName="imagen1">
-            <small *ngIf="formularioRegistro.get('imagen1')?.touched"> 
+            <input type="file" accept="'.jpg', '.jpeg', '.png'" placeholder="Imagen Perfil" id="imagen1" formControlName="imagen1">
+            <small *ngIf="formularioRegistro.get('imagen1')?.touched && !formularioRegistro.get('imagen1')?.valid"> 
                 Debe Ingresar una Imagen
             </small>
         </div>
-        <div class="form-group" *ngIf="tipo == 'paciente'">
-            <label for="imagen2">Segunda Imagen</label>
-            <input type="file" accept="image/*" placeholder="Imagen Perfil" id="imagen2" formControlName="imagen2">
-            <small *ngIf="formularioRegistro.get('imagen2')?.touched"> 
-                Debe Ingresar una Imagen
-            </small>
+        <div *ngIf="tipo == 'paciente'">
+            <div class="form-group" >
+                <label for="imagen2">Segunda Imagen</label>
+                <input type="file" accept="'.jpg', '.jpeg', '.png'" placeholder="Imagen Perfil" id="imagen2" formControlName="imagen2">
+                <small *ngIf="imagen2Control && imagen2Control.touched && !imagen2Control.valid"> 
+                    Debe Ingresar una Imagen
+                </small>
+            </div>
         </div>
     </div>
     <div class="form-group" *ngIf="tipo == 'especialista'">
-        <label>Seleccione Especialidad</label>
-        <div class="opciones-especialidad">
-            <button *ngFor="let opcion of especialidades" 
-            (click)="seleccionarEspecialidad(opcion)"
-            [ngClass]="{activo: especialidad == opcion}">
-                {{opcion}}
-            </button>
-        </div>
+        <app-lista-especialidades (onEspecialidadesSeleccionados)="onSeleccion($event)"></app-lista-especialidades>
+        <small *ngIf="formularioRegistro.getError('faltaEspecialidad')"> 
+            Debe Seleccionar Una Especialidad
+        </small>
     </div>
     <div class="form-group" *ngIf="tipo == 'especialista'">
         <label>Agregar Especialidad</label>
@@ -96,7 +94,7 @@
         <button (click)="agregarEspecialidad(nuevaEspecialidad.value)">Agregar</button>
     </div>
     <div class="button-group">
-        <button class="register-button" routerLink="/registro" [disabled]="!formularioRegistro.valid">Registrarse</button>
+        <button class="register-button" routerLink="/registro" [disabled]="!formularioRegistro.valid" (click)="generarUsuario()">Registrarse</button>
     </div>
     <strong *ngIf="formularioRegistro.get('email')?.pending"> 
         Verificando Disponibilidad de Usuario
@@ -105,3 +103,4 @@
         Usuario Disponible
     </strong>
 </form>
+<app-spinner *ngIf="generando" [mensaje]="'Generando Usuario'"></app-spinner>

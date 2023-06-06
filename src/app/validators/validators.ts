@@ -1,6 +1,7 @@
 import { Auth, fetchSignInMethodsForEmail } from '@angular/fire/auth';
-import { ValidatorFn, ValidationErrors, AbstractControl, AsyncValidatorFn, FormGroup } from '@angular/forms';
+import { ValidatorFn, ValidationErrors, AbstractControl, AsyncValidatorFn, FormGroup, FormControl } from '@angular/forms';
 import { Observable, debounce, debounceTime, map, take } from 'rxjs';
+import { EspecialidadesSeleccion } from '../interfaces/especialidad-seleccion';
 
 
 export function confirmarClave(): ValidatorFn
@@ -19,6 +20,25 @@ export function confirmarClave(): ValidatorFn
     else
     {
       formGroup.get('repetirPassword')?.setErrors(null);
+      return null;
+    }
+  }
+}
+
+export function confirmarEspecialidad(especialidades: EspecialidadesSeleccion[]): ValidatorFn
+{
+  return (formGroup: AbstractControl): ValidationErrors | null =>
+  {
+    const error = { faltaEspecialidad: 'Debe Seleccionar Una Especialidad'};
+    console.log(especialidades);
+    if(especialidades.length == 0)
+    {
+      formGroup.get('faltaEspecialidad')?.setErrors(error);
+      return error;
+    }
+    else
+    {
+      formGroup.get('faltaEspecialidad')?.setErrors(null);
       return null;
     }
   }
@@ -52,5 +72,17 @@ export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidator
         }, espera);
       });
     });
+  };
+}
+
+export function validarImagen(): ValidatorFn {
+  return (formControl: AbstractControl): ValidationErrors | null => {
+    const file = formControl.value;
+
+    if (file && !/\.(jpe?g|png)$/i.test(file.name)) {
+      return { invalidExtension: true };
+    }
+
+    return null;
   };
 }

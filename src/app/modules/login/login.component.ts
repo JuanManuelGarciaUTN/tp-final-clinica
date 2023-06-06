@@ -32,11 +32,10 @@ export class LoginComponent {
 
       signInWithEmailAndPassword(this.auth, usuario.email, usuario.password)
       .then((datosUsuario) =>{
-        console.log(datosUsuario);
         if(datosUsuario.user)
         {
           if(datosUsuario.user.emailVerified){
-            this.router.navigate(["/home"]);
+            this.router.navigate(["/"]);
           }
           else{
             this.validando=false;

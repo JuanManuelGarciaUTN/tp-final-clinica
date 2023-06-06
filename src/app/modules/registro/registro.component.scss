@@ -22,6 +22,7 @@
   label {
     display: block;
     margin-bottom: 5px;
+    text-align: center;
     font-weight: bold;
   }
   
@@ -92,10 +93,6 @@ small{
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-}
-
-label{
-  text-align: center;
 }
 
 .opciones-especialidad{

@@ -1,0 +1,41 @@
+.especialidad-datos{
+    cursor: pointer;
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid gray;
+    justify-content: center;
+    width: 155px;
+    margin: 5px 5px 0px 0px;
+    font-size: 14px;
+    font-size: 14px;
+}
+.especialidad-datos:hover{
+    font-weight: 600;
+}
+
+.selector{
+    display: grid;
+    justify-content: center;
+}
+
+.especialidad-datos p{
+    display: inline-block;
+    justify-content: center;
+    margin: 0px;
+    width: 125px;
+    text-align: center;
+}
+
+.titulo{
+    font-weight: 600;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.listado{
+    display: flex;
+    flex-wrap: wrap;
+}
+

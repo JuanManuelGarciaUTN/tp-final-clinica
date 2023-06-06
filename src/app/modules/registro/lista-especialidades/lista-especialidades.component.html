@@ -1,0 +1,7 @@
+<p class="titulo">Seleccione Especialidad</p>
+<div class="listado">
+    <div *ngFor="let item of especialidades" class="especialidad-datos" (click)="seleccionar(item)">
+        <p>{{item.especialidad.nombre}}</p>
+        <div class="selector"><input type="checkbox" [name]="item.especialidad.id" [(ngModel)]="item.seleccionado" (change)="actulizarSeleccion()"></div>
+    </div>
+</div>
