@@ -1,0 +1,37 @@
+:host{
+    background-color: red;
+}
+.text-primary, .text-title{
+    font-size: 28px;
+    font-weight: 700;
+    margin: 4px 0px;
+}
+
+.container{
+    margin-top: 10vh;
+}
+
+.col-md-8{
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.img-1{
+    position: absolute;
+    z-index: -1;
+    bottom: 5%;
+    width: 35vw;
+    left: 5%;
+}
+
+.img-2{
+    position: absolute;
+    z-index: -1;
+    bottom: 5%;
+    width: 35vw;
+    right: 5%;
+}
+
+p{
+    font-size: 18px;
+}

@@ -1,0 +1,116 @@
+.login-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group {
+    margin: 10px 10px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding: 10px 15px 15px;
+  }
+
+  .button-group{
+    width: 212px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 280px;
+  }
+  
+  button {
+    width: 100%;
+    margin: 2px 0px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .register-button {
+    background-color: #3485c3;
+    color: #fff;
+  }
+
+  .register-button:hover{
+    background-color: #2f75aa;
+  }
+
+  .register-button:disabled{
+    background-color: rgba($color: #3485c3, $alpha: 0.7);
+    cursor: not-allowed;
+  }
+
+  input.ng-invalid.ng-touched {
+    border: red 1px solid;
+}
+
+small{
+  text-decoration: underline;
+  color: red;
+  display: block;
+  width: 212px;
+}
+
+.activo {
+  background-color: #3485c3;
+  color: #fff;
+}
+
+.opciones-usuario{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.opcion{
+  margin: 5px;
+  width: 300px;
+}
+
+.datos{
+  display: flex;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+label{
+  text-align: center;
+}
+
+.opciones-especialidad{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  padding: 0px;
+}
+
+.opciones-especialidad button{
+  width: 155px;
+  margin: 5px 5px 0px 0px;
+  font-size: 14px;
+}
