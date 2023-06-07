@@ -34,7 +34,7 @@ export class RegistroComponent {
             private auth: Auth,
             private cdr: ChangeDetectorRef) {
     this.formularioRegistro = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email], usuarioExiste(this.auth)),
+      //email: new FormControl("", [Validators.required, Validators.email], usuarioExiste(this.auth)),
       nombre: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       apellido: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       obraSocial: new FormControl("", [Validators.required]),
@@ -75,7 +75,7 @@ export class RegistroComponent {
     this.obraSocialControl?.setErrors(null);
     this.imagen2Control?.setErrors(null);
 
-    this.formularioRegistro.updateValueAndValidity();
+    this.especialidades = [];
     this.cdr.detectChanges();
   }
   
@@ -92,10 +92,10 @@ export class RegistroComponent {
     this.cdr.detectChanges();
   }
 
-  onSeleccion(espelialidades: Array<EspecialidadesSeleccion>) {
-    this.especialidades = espelialidades;
+  onSeleccion(especialidades: Array<EspecialidadesSeleccion>) {
+    this.especialidades = especialidades;
     if(this.especialidades.length > 0) {
-      this.formularioRegistro.setErrors({faltaEspecialidad: null});
+      this.formularioRegistro.updateValueAndValidity();
     }
     else{
       this.formularioRegistro.setErrors({faltaEspecialidad: true});

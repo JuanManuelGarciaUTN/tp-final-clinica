@@ -44,7 +44,7 @@
         <div class="form-group" >
             <label for="nombre">Email</label>
             <input type="text" id="email" placeholder="Ingrese email" formControlName="email" (input)="eliminarEspacios(formularioRegistro.get('email'))">
-            <small *ngIf="formularioRegistro.get('email')?.touched && formularioRegistro.get('email')?.errors?.['email']"> 
+            <small *ngIf="formularioRegistro.get('email')?.touched && (formularioRegistro.get('email')?.errors?.['email'] || formularioRegistro.get('email')?.errors?.['required'])"> 
                 Debe Ingresar Un Email Valido
             </small>
             <small *ngIf="formularioRegistro.get('email')?.getError('usuarioExiste')"> 
@@ -104,7 +104,7 @@
         <button (click)="agregarEspecialidad(nuevaEspecialidad.value)">Agregar</button>
     </div>
     <div class="button-group">
-        <button class="register-button" routerLink="/registro" [disabled]="!formularioRegistro.valid" (click)="generarUsuario()">Registrarse</button>
+        <button class="register-button" routerLink="/registro" [disabled]="!formularioRegistro.valid || (tipo == 'especialista' && especialidades.length == 0)" (click)="generarUsuario()">Registrarse</button>
     </div>
     <strong *ngIf="formularioRegistro.get('email')?.pending"> 
         Verificando Disponibilidad de Usuario
