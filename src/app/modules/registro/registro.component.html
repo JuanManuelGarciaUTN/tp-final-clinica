@@ -3,7 +3,7 @@
     <div class="opciones-usuario">
         <button class="opcion" [ngClass]="{activo: tipo == 'paciente'}" (click)="setPaciente()">Paciente</button>
         <button class="opcion" [ngClass]="{activo: tipo == 'especialista'}" (click)="setEspecialista()">Especialista</button>
-        <button class="opcion" [ngClass]="{activo: tipo == 'admin'}" (click)="setAdmin()">Admin</button>
+        <button *ngIf="esAdmin" class="opcion" [ngClass]="{activo: tipo == 'admin'}" (click)="setAdmin()">Admin</button>
     </div>
     <div class="datos" *ngIf="tipo != ''">
         <div class="form-group" >
@@ -104,3 +104,9 @@
     </strong>
 </form>
 <app-spinner *ngIf="generando" [mensaje]="'Generando Usuario'"></app-spinner>
+<div *ngIf="mensaje" class="pantalla-completa">
+    <div class="mensaje">
+        <p>{{mensaje}}</p>
+        <button (click)="finalizarRegistro()">Ok</button>
+    </div>
+</div>

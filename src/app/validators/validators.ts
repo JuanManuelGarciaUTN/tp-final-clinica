@@ -25,25 +25,6 @@ export function confirmarClave(): ValidatorFn
   }
 }
 
-export function confirmarEspecialidad(especialidades: EspecialidadesSeleccion[]): ValidatorFn
-{
-  return (formGroup: AbstractControl): ValidationErrors | null =>
-  {
-    const error = { faltaEspecialidad: 'Debe Seleccionar Una Especialidad'};
-    console.log(especialidades);
-    if(especialidades.length == 0)
-    {
-      formGroup.get('faltaEspecialidad')?.setErrors(error);
-      return error;
-    }
-    else
-    {
-      formGroup.get('faltaEspecialidad')?.setErrors(null);
-      return null;
-    }
-  }
-}
-
 export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn
 {
   return (control: AbstractControl) =>{

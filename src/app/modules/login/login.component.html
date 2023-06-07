@@ -16,7 +16,7 @@
     </div>
     <div class="button-group">
         <button class="login-button" [disabled]="!formularioLogin.valid" (click)="logear()">Login</button>
-        <button class="register-button" routerLink="/registro">Registrarse</button>
+        <button class="register-button" (click)="registro()">Registrarse</button>
     </div>
     <strong class="error" *ngIf="error != ''">
         {{error}}

@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Auth, createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from '@angular/fire/auth';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { confirmarClave, usuarioExiste, confirmarEspecialidad } from 'src/app/validators/validators';
-import {DniFormatoPipe} from "src/app/pipes/dni-formato.pipe";
+import { confirmarClave, usuarioExiste } from 'src/app/validators/validators';
 import { EspecialidadesSeleccion } from 'src/app/interfaces/especialidad-seleccion';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,15 +22,17 @@ export class RegistroComponent {
   public especialidades: EspecialidadesSeleccion[] = [];
   public posiblesEspecialidades: Array<any> = [];
   public generando: boolean = false;
+  public mensaje: string = "";
 
-  constructor(private db: BaseDeDatosService, 
+  constructor(private db: BaseDeDatosService,
+            private usuario: UsuarioService, 
             private router: Router,
             private auth: Auth,
             private cdr: ChangeDetectorRef) {
     this.formularioRegistro = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email], usuarioExiste(this.auth)),
-      nombre: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\s]+$")]),
-      apellido: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\s]+$")]),
+      nombre: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
+      apellido: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       obraSocial: new FormControl("", [Validators.required]),
       edad: new FormControl("", [Validators.required, Validators.pattern("^[0-9]+$"), Validators.min(1), Validators.max(120)]),
       dni: new FormControl("", [Validators.required, Validators.pattern("^[0-9]+$"), Validators.maxLength(8), Validators.minLength(7)]),
@@ -42,6 +44,10 @@ export class RegistroComponent {
 
     this.imagen2Control = this.formularioRegistro.get('imagen2');
     this.obraSocialControl = this.formularioRegistro.get('obraSocial');
+  }
+
+  get esAdmin(){
+    return this.usuario.datos?.tipo == "admin";
   }
 
   setPaciente() {
@@ -105,9 +111,11 @@ export class RegistroComponent {
     })
     .then(() => {
       this.generando = false;
+      this.mensaje = "Se Genero El Usuario Exitosamente. Se Envio Mail de Verificacion de Cuenta";
     })
     .catch((error) => {
       this.generando = false;
+      this.mensaje = "Error, Base de Datos Fuera de Servicio, vuelva a intentarlo en unos minutos";
       console.error('Registration failed:', error);
     });
   }
@@ -131,6 +139,7 @@ export class RegistroComponent {
 
       case "especialista":
         datos.especialidades = this.especialidades.map(datos => datos.especialidad.nombre);
+        datos.habilitado = false;
         break;
     }
     this.db.agregarUsuario(usuario);
@@ -159,5 +168,14 @@ export class RegistroComponent {
 
   agregarEspecialidad(valor: string){
     this.db.agregarEspecialidad(valor);
+  }
+
+  finalizarRegistro(){
+    if(this.usuario.datos?.tipo == "admin"){
+      this.router.navigate([""]);
+    }
+    else{
+      this.router.navigate(["/login"]);
+    }
   }
 }

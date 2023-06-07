@@ -3,6 +3,7 @@ import { Auth, signInWithEmailAndPassword, sendEmailVerification} from '@angular
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
+    private usuario: UsuarioService,
     private auth: Auth) {
     this.formularioLogin = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
@@ -35,7 +37,17 @@ export class LoginComponent {
         if(datosUsuario.user)
         {
           if(datosUsuario.user.emailVerified){
-            this.router.navigate(["/"]);
+            this.usuario.obtenerDatos()
+            .then(datos=>{
+              if(datos.tipo == "especialista" && !datos.habilitado){
+                this.validando=false;
+                this.error = "Cuenta NO Verificado Por Administracion. Contacte a la Clinica";
+                this.usuario.cerrarSesion();
+              }
+              else{
+                this.router.navigate(["/"]);
+              }
+            })  
           }
           else{
             this.validando=false;
@@ -59,5 +71,9 @@ export class LoginComponent {
   private limpiarEspacios(){
     this.formularioLogin.get('nombre')?.setValue(this.formularioLogin.get('nombre')?.value.trim());
     this.formularioLogin.get('password')?.setValue(this.formularioLogin.get('password')?.value.trim());
+  }
+
+  registro(){
+    this.router.navigate(["/registro"]);
   }
 }
