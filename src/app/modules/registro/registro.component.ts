@@ -185,9 +185,23 @@ export class RegistroComponent {
   }
 
   cargarImagen1($event: any){
-    this.imagen1 = $event.target.files[0];
+    let extension = this.formularioRegistro.get("imagen1")?.value.split(".");
+    extension = extension[extension.length - 1];
+    if(extension!= "png" && extension!= "jpeg" && extension!= "gif"){
+      this.formularioRegistro.get("imagen1")?.setValue("");
+    }
+    else{
+      this.imagen1 = $event.target.files[0];
+    }
   }
   cargarImagen2($event: any){
-    this.imagen2 = $event.target.files[0];
+    let extension = this.formularioRegistro.get("imagen2")?.value.split(".");
+    extension = extension[extension.length - 1];
+    if(extension!= "png" && extension!= "jpeg" && extension!= "gif"){
+      this.formularioRegistro.get("imagen2")?.setValue("");
+    }
+    else{
+      this.imagen2 = $event.target.files[0];
+    }
   }
 }

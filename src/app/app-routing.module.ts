@@ -11,8 +11,8 @@ import { UsuariosComponent } from './modules/usuarios/usuarios.component';
 import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
-  { path: "", component:BienvenidaComponent},
-  { path: "home", component:BienvenidaComponent},
+  { path: "", component:BienvenidaComponent, canActivate: [NoLogueadoGuard]},
+  { path: "home", component:BienvenidaComponent, canActivate: [NoLogueadoGuard]},
   { 
     path: "registro", 
     component: RegistroComponent,
@@ -35,7 +35,7 @@ const routes: Routes = [
     path: "detalles-usuarios", 
     component: UsuariosComponent,
     loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule),
-    //canActivate: [AdminGuard]
+    canActivate: [AdminGuard]
   },
 ];
 
