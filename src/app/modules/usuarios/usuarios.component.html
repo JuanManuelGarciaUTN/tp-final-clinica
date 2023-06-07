@@ -1,0 +1,7 @@
+
+<div class="izquierda">
+    <button (click)="enviarARegistro()">Generar Nuevo Usuario</button>
+    <app-lista-usuarios (usuarioSeleccionado)="onSeleccion($event)"></app-lista-usuarios>
+</div>
+
+<app-detalle-usuario class="derecha" [usuario]="usuario"></app-detalle-usuario>

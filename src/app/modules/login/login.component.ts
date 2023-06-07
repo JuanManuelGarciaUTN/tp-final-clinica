@@ -45,7 +45,7 @@ export class LoginComponent {
                 this.usuario.cerrarSesion();
               }
               else{
-                this.router.navigate(["/"]);
+                this.router.navigate(["/perfil"]);
               }
             })  
           }
@@ -69,11 +69,26 @@ export class LoginComponent {
   }
 
   private limpiarEspacios(){
-    this.formularioLogin.get('nombre')?.setValue(this.formularioLogin.get('nombre')?.value.trim());
+    this.formularioLogin.get('email')?.setValue(this.formularioLogin.get('email')?.value.trim());
     this.formularioLogin.get('password')?.setValue(this.formularioLogin.get('password')?.value.trim());
   }
 
   registro(){
     this.router.navigate(["/registro"]);
+  }
+
+  completarPaciente(){
+    this.formularioLogin.get('email')?.setValue("artlixutn@gmail.com");
+    this.formularioLogin.get('password')?.setValue("4566547845665478");
+  }
+
+  completarAdmin(){
+    this.formularioLogin.get('email')?.setValue("se4k07+cx4gqeska4yys@guerrillamailblock.com");
+    this.formularioLogin.get('password')?.setValue("rootrootrootroot");
+  }
+
+  completarEspecialista(){
+    this.formularioLogin.get('email')?.setValue("se64tk+1crusdetf44ak@sharklasers.com");
+    this.formularioLogin.get('password')?.setValue("medicomedicomedico");
   }
 }

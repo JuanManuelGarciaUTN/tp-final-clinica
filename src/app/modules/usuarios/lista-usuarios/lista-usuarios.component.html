@@ -1,0 +1,12 @@
+<div>
+    <p class="tipo">Tipo</p>
+    <p class="dni">DNI</p>
+    <p class="nombre">Nombre</p>
+    <p class="apellido">Apellido</p>
+</div>
+<button *ngFor="let item of usuarios" (click)="seleccionarUsuario(item)">
+    <p class="tipo">{{item.tipo}}</p>
+    <p class="dni">{{item.dni}}</p>
+    <p class="nombre">{{item.nombre}}</p>
+    <p class="apellido">{{item.apellido}}</p>
+</button>

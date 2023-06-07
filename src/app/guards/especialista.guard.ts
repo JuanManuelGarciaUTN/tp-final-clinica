@@ -11,10 +11,7 @@ export class EspecialistaGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.usuario.datos?.tipo == "especialista"){
-        return true;
-      }
-      return false;
+      return this.usuario.datos?.tipo == "especialista";
   }
   
 }

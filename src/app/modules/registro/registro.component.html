@@ -67,7 +67,12 @@
         </div>
         <div class="form-group">
             <label for="imagen1">Imagen Perfil</label>
-            <input type="file" accept="'.jpg', '.jpeg', '.png'" placeholder="Imagen Perfil" id="imagen1" formControlName="imagen1">
+            <input type="file" 
+                accept="image/*" 
+                placeholder="Imagen Perfil" 
+                id="imagen1" 
+                formControlName="imagen1"
+                (change)="cargarImagen1($event)">
             <small *ngIf="formularioRegistro.get('imagen1')?.touched && !formularioRegistro.get('imagen1')?.valid"> 
                 Debe Ingresar una Imagen
             </small>
@@ -75,7 +80,12 @@
         <div *ngIf="tipo == 'paciente'">
             <div class="form-group" >
                 <label for="imagen2">Segunda Imagen</label>
-                <input type="file" accept="'.jpg', '.jpeg', '.png'" placeholder="Imagen Perfil" id="imagen2" formControlName="imagen2">
+                <input type="file" 
+                    accept="image/*" 
+                    placeholder="Imagen Perfil" 
+                    id="imagen2" 
+                    formControlName="imagen2"
+                    (change)="cargarImagen2($event)">
                 <small *ngIf="imagen2Control && imagen2Control.touched && !imagen2Control.valid"> 
                     Debe Ingresar una Imagen
                 </small>

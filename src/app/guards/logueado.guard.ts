@@ -6,11 +6,11 @@ import { UsuarioService } from '../services/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PacienteGuard implements CanActivate {
+export class LogueadoGuard implements CanActivate {
   constructor(private usuario: UsuarioService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.usuario.datos?.tipo == "paciente";
+      return this.usuario.datos != undefined;
   }
 }

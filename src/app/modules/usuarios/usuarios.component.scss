@@ -1,0 +1,43 @@
+:host{
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    margin-top: 5px;
+}
+.derecha{
+    border: 1px solid whitesmoke;
+    width: 40%;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+app-lista-usuarios{
+    width: 100%;
+}
+
+.izquierda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid whitesmoke;
+    padding: 10px;
+    width: 58%;
+    height: 90%;
+    border-radius: 25px;
+}
+
+button{
+    width: 80%;
+    margin: 2px 0px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #3485c3;
+    color: #fff;
+}
+
+button:hover{
+    background-color: #2f75aa;
+}

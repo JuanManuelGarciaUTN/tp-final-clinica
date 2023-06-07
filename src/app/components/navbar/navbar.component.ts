@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  constructor(private usuario: UsuarioService) { }
+  constructor(private usuario: UsuarioService, private router: Router) { }
 
   get tipoUsuario(){
     return this.usuario.datos?.tipo;
@@ -15,5 +16,6 @@ export class NavbarComponent {
 
   cerrarSesion(){
     this.usuario.cerrarSesion();
+    this.router.navigate(["/home"]);
   }
 }

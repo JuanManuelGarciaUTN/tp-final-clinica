@@ -10,7 +10,7 @@ export interface Usuario {
     obraSocial?: string,
     especialidades?: string[],
     email: string, 
-    imagen1: string,
-    imagen2?: string,
+    imagen1: any,
+    imagen2?: any,
     habilitado?: boolean
 }

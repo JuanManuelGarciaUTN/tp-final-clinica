@@ -11,10 +11,7 @@ export class AdminNologueadoGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(!this.usuario.datos || this.usuario.datos?.tipo == "admin"){
-        return true;
-      }
-      return false;
+      console.log(this.usuario.datos,"|",this.usuario.datos?.tipo);
+      return this.usuario.datos == undefined || this.usuario.datos?.tipo == "admin";
   }
-  
 }

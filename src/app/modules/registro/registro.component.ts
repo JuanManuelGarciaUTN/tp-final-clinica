@@ -7,6 +7,8 @@ import { EspecialidadesSeleccion } from 'src/app/interfaces/especialidad-selecci
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { finalize } from 'rxjs/operators';
+import { Storage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-registro',
@@ -23,6 +25,8 @@ export class RegistroComponent {
   public posiblesEspecialidades: Array<any> = [];
   public generando: boolean = false;
   public mensaje: string = "";
+  public imagen1: any;
+  public imagen2: any;
 
   constructor(private db: BaseDeDatosService,
             private usuario: UsuarioService, 
@@ -129,17 +133,18 @@ export class RegistroComponent {
       dni: datos.dni,
       edad: datos.edad,
       tipo: this.tipo,
-      imagen1: datos.imagen1
+      imagen1: this.imagen1
     };
 
     switch(usuario.tipo){
       case "paciente":
         usuario.obraSocial = datos.obraSocial;
+        usuario.imagen2 = this.imagen2;
         break;
 
       case "especialista":
-        datos.especialidades = this.especialidades.map(datos => datos.especialidad.nombre);
-        datos.habilitado = false;
+        usuario.especialidades = this.especialidades.map(datos => datos.especialidad.nombre);
+        usuario.habilitado = false;
         break;
     }
     this.db.agregarUsuario(usuario);
@@ -172,10 +177,17 @@ export class RegistroComponent {
 
   finalizarRegistro(){
     if(this.usuario.datos?.tipo == "admin"){
-      this.router.navigate([""]);
+      this.router.navigate(["detalles-usuarios"]);
     }
     else{
       this.router.navigate(["/login"]);
     }
+  }
+
+  cargarImagen1($event: any){
+    this.imagen1 = $event.target.files[0];
+  }
+  cargarImagen2($event: any){
+    this.imagen2 = $event.target.files[0];
   }
 }

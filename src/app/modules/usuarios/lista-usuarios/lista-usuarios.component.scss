@@ -1,0 +1,45 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+div{
+    margin: 2px 10px;
+}
+button{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    display: flex;
+    text-align: left;
+    margin: 2px 10px;
+    border: 1px solid gainsboro;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+p{
+    display: inline-block;
+    margin-bottom: 0px;
+    text-transform: capitalize;
+}
+.tipo{
+    width: 15%;
+    padding-left: 5px;
+}
+
+.nombre{
+    width: 35%;
+    padding-left: 5px;
+}
+
+.apellido{
+    width: 35%;
+    padding-left: 5px;
+}
+
+.dni{
+    width: 15%;
+    padding-left: 5px;
+}

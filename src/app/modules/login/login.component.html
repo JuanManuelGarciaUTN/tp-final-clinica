@@ -17,6 +17,9 @@
     <div class="button-group">
         <button class="login-button" [disabled]="!formularioLogin.valid" (click)="logear()">Login</button>
         <button class="register-button" (click)="registro()">Registrarse</button>
+        <button class="login-button" (click)="completarPaciente()">Completar Paciente</button>
+        <button class="login-button" (click)="completarAdmin()">Completar Admin</button>
+        <button class="login-button" (click)="completarEspecialista()">Completar Especialista</button>
     </div>
     <strong class="error" *ngIf="error != ''">
         {{error}}

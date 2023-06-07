@@ -1,0 +1,56 @@
+<label>Detalles de Usuario</label>
+<div *ngIf="nombre">
+    <label>Nombre</label>
+    <p>{{nombre}}</p>
+</div>
+<div *ngIf="apellido">
+    <label>Apellido</label>
+    <p>{{apellido}}</p>
+</div>
+<div *ngIf="dni">
+    <label>DNI</label>
+    <p>{{dni}}</p>
+</div>
+<div *ngIf="tipo">
+    <label>Tipo</label>
+    <p>{{tipo}}</p>
+</div>
+<div *ngIf="edad">
+    <label>Edad</label>
+    <p>{{edad}}</p>
+</div>
+<div *ngIf="email">
+    <label>Email</label>
+    <p>{{email}}</p>
+</div>
+<div *ngIf="obraSocial">
+    <label>Obra Social</label>
+    <p>{{obraSocial}}</p>
+</div>
+<div *ngIf="especialidades">
+    <label class="br">Especialidades</label>
+    <p *ngFor="let item of especialidades">{{item}}</p>
+</div>
+<div *ngIf="especialidades">
+    <label>Habilitado</label>
+    <p [textContent]="habilitado ? 'SI' : 'NO'"></p>
+</div>
+<div class="contenedor-imagenes">
+    <div class="imagen" *ngIf="imagen1">
+        <label class="br">Foto Perfil</label>
+        <img [src]="imagen1" alt="foto perfil">
+    </div>
+    <div class="imagen" *ngIf="imagen2">
+        <label class="br">Foto Secundaria</label>
+        <img [src]="imagen2" alt="foto secundaria">
+    </div>
+</div>
+<button *ngIf="tipo == 'especialista'" 
+    (click)="cambiarEstado()" 
+    [disabled]="cargando"
+    [ngClass]="{activo: habilitado}">
+    {{mensaje}} Especialista
+</button>
+
+
+
