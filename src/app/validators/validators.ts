@@ -1,6 +1,6 @@
 import { Auth, fetchSignInMethodsForEmail } from '@angular/fire/auth';
 import { ValidatorFn, ValidationErrors, AbstractControl, AsyncValidatorFn, FormGroup, FormControl } from '@angular/forms';
-import { Observable, debounce, debounceTime, map, take } from 'rxjs';
+import { Observable, debounce, debounceTime, distinctUntilChanged, finalize, map, switchMap, take } from 'rxjs';
 import { EspecialidadesSeleccion } from '../interfaces/especialidad-seleccion';
 
 
@@ -38,7 +38,7 @@ export function confirmarClave(): ValidatorFn
     
         timer = setTimeout(() => {
           const email = control.value.toLowerCase();
-    
+          console.log("llamada al server");
           fetchSignInMethodsForEmail(auth, email)
           .then((listaEmails) => {
               if (listaEmails.length > 0) {
@@ -54,13 +54,13 @@ export function confirmarClave(): ValidatorFn
       });
     });
   };
-}*/
-export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn {
+}
+/*export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn {
   return (control: AbstractControl) => {
     return new Promise<ValidationErrors | null>((resolve, reject) => {
       control.valueChanges.pipe(debounceTime(espera)).subscribe(() => {
         const email = control.value.toLowerCase();
-
+        console.log("llamada al server");
         fetchSignInMethodsForEmail(auth, email)
           .then((listaEmails) => {
             if (listaEmails.length > 0) {
@@ -73,6 +73,43 @@ export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidator
             reject({ error: error });
           });
       });
+    });
+  };
+}*/
+export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn {
+  let serverCallInProgress = false;
+
+  return (control: AbstractControl) => {
+    return new Promise<ValidationErrors | null>((resolve, reject) => {
+      control.valueChanges
+        .pipe(
+          debounceTime(espera),
+          distinctUntilChanged(),
+          switchMap((value) => {
+            if (serverCallInProgress) {
+              return new Promise<ValidationErrors | null>(() => {});
+            }
+
+            serverCallInProgress = true;
+            const email = value.toLowerCase();
+            console.log('llamada al servidor');
+            return fetchSignInMethodsForEmail(auth, email).then((listaEmails) => {
+              return listaEmails.length > 0 ? { usuarioExiste: true } : null;
+            });
+          }),
+          take(1),
+          finalize(() => {
+            serverCallInProgress = false;
+          })
+        )
+        .subscribe(
+          (result) => {
+            resolve(result);
+          },
+          (error) => {
+            reject({ error: error });
+          }
+        );
     });
   };
 }
