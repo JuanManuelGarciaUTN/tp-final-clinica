@@ -25,7 +25,7 @@ export function confirmarClave(): ValidatorFn
   }
 }
 
-export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn
+/*export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn
 {
   return (control: AbstractControl) =>{
     let timer: NodeJS.Timeout | null = null;
@@ -51,6 +51,27 @@ export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidator
               reject({ error: error });
             });
         }, espera);
+      });
+    });
+  };
+}*/
+export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn {
+  return (control: AbstractControl) => {
+    return new Promise<ValidationErrors | null>((resolve, reject) => {
+      control.valueChanges.pipe(debounceTime(espera)).subscribe(() => {
+        const email = control.value.toLowerCase();
+
+        fetchSignInMethodsForEmail(auth, email)
+          .then((listaEmails) => {
+            if (listaEmails.length > 0) {
+              resolve({ usuarioExiste: true });
+            } else {
+              resolve(null);
+            }
+          })
+          .catch((error) => {
+            reject({ error: error });
+          });
       });
     });
   };

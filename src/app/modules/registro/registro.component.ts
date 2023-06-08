@@ -34,7 +34,7 @@ export class RegistroComponent {
             private auth: Auth,
             private cdr: ChangeDetectorRef) {
     this.formularioRegistro = new FormGroup({
-      //email: new FormControl("", [Validators.required, Validators.email], usuarioExiste(this.auth)),
+      email: new FormControl("", [Validators.required, Validators.email], usuarioExiste(this.auth)),
       nombre: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       apellido: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       obraSocial: new FormControl("", [Validators.required]),
@@ -166,6 +166,11 @@ export class RegistroComponent {
     control.setValue(value.replace(/[^A-Za-z\s]/g, ''));
   }
 
+  formatearInputLetras(input: HTMLInputElement) {
+    const value = input.value || '';
+    input.value = value.replace(/[^A-Za-z\s]/g, '');
+  }
+
   eliminarEspacios(control: any){
     const value = control.value || '';
     control.setValue(value.replace(/\s/g, ''));
@@ -187,7 +192,7 @@ export class RegistroComponent {
   cargarImagen1($event: any){
     let extension = this.formularioRegistro.get("imagen1")?.value.split(".");
     extension = extension[extension.length - 1];
-    if(extension!= "png" && extension!= "jpeg" && extension!= "gif"){
+    if(extension!= "png" && extension!= "jpeg" && extension!= "jpg" && extension!= "gif"){
       this.formularioRegistro.get("imagen1")?.setValue("");
     }
     else{
@@ -197,7 +202,7 @@ export class RegistroComponent {
   cargarImagen2($event: any){
     let extension = this.formularioRegistro.get("imagen2")?.value.split(".");
     extension = extension[extension.length - 1];
-    if(extension!= "png" && extension!= "jpeg" && extension!= "gif"){
+    if(extension!= "png" && extension!= "jpeg" && extension!= "jpg" && extension!= "gif"){
       this.formularioRegistro.get("imagen2")?.setValue("");
     }
     else{
