@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { confirmarClave, usuarioExiste } from 'src/app/validators/validators';
@@ -7,8 +7,7 @@ import { EspecialidadesSeleccion } from 'src/app/interfaces/especialidad-selecci
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { finalize } from 'rxjs/operators';
-import { Storage } from '@angular/fire/storage';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @Component({
   selector: 'app-registro',
@@ -21,6 +20,7 @@ export class RegistroComponent {
   public obraSocialControl: AbstractControl | null;
 
   public tipo: string = "";
+  public captcha?: string;
   public especialidades: EspecialidadesSeleccion[] = [];
   public posiblesEspecialidades: Array<any> = [];
   public generando: boolean = false;
@@ -208,5 +208,9 @@ export class RegistroComponent {
     else{
       this.imagen2 = $event.target.files[0];
     }
+  }
+
+  handleCaptcha(token: string) {
+    this.captcha = token;
   }
 }

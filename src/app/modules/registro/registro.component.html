@@ -104,7 +104,7 @@
         <button (click)="agregarEspecialidad(nuevaEspecialidad.value)">Agregar</button>
     </div>
     <div class="button-group">
-        <button class="register-button" routerLink="/registro" [disabled]="!formularioRegistro.valid || (tipo == 'especialista' && especialidades.length == 0)" (click)="generarUsuario()">Registrarse</button>
+        <button class="register-button" routerLink="/registro" [disabled]="!formularioRegistro.valid || (tipo == 'especialista' && especialidades.length == 0) || !captcha" (click)="generarUsuario()">Registrarse</button>
     </div>
     <strong *ngIf="formularioRegistro.get('email')?.pending"> 
         Verificando Disponibilidad de Usuario
@@ -112,6 +112,8 @@
     <strong *ngIf="formularioRegistro.get('email')?.valid"> 
         Usuario Disponible
     </strong>
+    <re-captcha (resolved)="handleCaptcha($event)" siteKey="6LeE1X8mAAAAANS0dz0PIEOcepT_2GWKMftCnP6z"></re-captcha>
+
 </form>
 <app-spinner *ngIf="generando" [mensaje]="'Generando Usuario'"></app-spinner>
 <div *ngIf="mensaje" class="pantalla-completa">

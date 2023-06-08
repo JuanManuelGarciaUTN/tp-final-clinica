@@ -4,6 +4,8 @@ import { RegistroComponent } from './registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaEspecialidadesComponent } from './lista-especialidades/lista-especialidades.component';
 import { SpinnerModule } from "../spinner/spinner.module";
+import { ReCaptchaV3Service } from 'ngx-captcha';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 
@@ -16,7 +18,8 @@ import { SpinnerModule } from "../spinner/spinner.module";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        SpinnerModule
+        SpinnerModule,
+        RecaptchaModule,
     ]
 })
 export class RegistroModule { }
