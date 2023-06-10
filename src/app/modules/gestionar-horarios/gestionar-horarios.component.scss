@@ -1,0 +1,85 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+p {
+    display: inline-block;
+    width: 155px;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+h3{
+    text-align: center;
+}
+
+
+button {
+    margin: 5px;
+    width: 50px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.activo {
+    background-color: #3485c3;
+    color: #fff;
+}
+
+.especialidades {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.especialidades button, .actualizar{
+    width: 200px;
+}
+
+.horario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.horario div{
+    border: 2px solid whitesmoke;
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+
+input {
+    background-color: whitesmoke;
+    border: 1px solid #eee;
+    width: 50px;
+    margin: 0px 10px;
+    font-size: 18px;
+}
+
+.cambiar-estado{
+    font-size: 18px;
+    width: auto;
+    padding: 2px 5px;
+}
+
+.estado{
+    color: red;
+    background-color: whitesmoke;
+    text-align: center;
+    font-weight: bold;
+    width: 145px;
+    border-radius: 5px;
+}
+.habilitado{
+    color: rgb(73, 181, 23);
+}
+.mensaje{
+    width: auto;
+}

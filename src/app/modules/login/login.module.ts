@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerModule } from '../spinner/spinner.module';
+import { DirectivasModule } from '../directivas/directivas.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SpinnerModule } from '../spinner/spinner.module';
     imports: [
         SpinnerModule,
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
+        DirectivasModule
     ]
 })
 export class LoginModule { }

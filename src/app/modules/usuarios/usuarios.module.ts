@@ -15,6 +15,9 @@ import { DniFormatoPipe } from 'src/app/pipes/dni-formato.pipe';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    DetalleUsuarioComponent
   ]
 })
 export class UsuariosModule { }

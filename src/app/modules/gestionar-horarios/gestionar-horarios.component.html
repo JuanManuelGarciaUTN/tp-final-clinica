@@ -1,0 +1,25 @@
+<h3>Gestionar Horarios</h3>
+<div class="especialidades">
+    <button *ngFor="let item of especialidades" (click)="seleccionarHorario(item)" [ngClass]="{activo: horario && horario.especialidad == item.especialidad}">{{item.especialidad}}</button>
+</div>
+<div class="horario" *ngIf="horario">
+    <div>
+        <div>
+            <p>Tiempo del Turno</p>
+            <button [ngClass]="{activo:horario.tiempo == 30}" (click)="cambiarTiempo(30)">30</button>
+            <button [ngClass]="{activo:horario.tiempo == 45}" (click)="cambiarTiempo(45)">45</button>
+            <button [ngClass]="{activo:horario.tiempo == 60}" (click)="cambiarTiempo(60)">60</button>
+        </div>
+        <div *ngFor="let dia of horario.dias; let i = index">
+            <p>{{dia.nombre}}</p>
+            <p class="estado" [ngClass]="{habilitado:dia.estado}">{{dia.estado ? 'habilitado' : 'no disponible'}}</p>
+            <input type="number" [(ngModel)]="dia.inicio" (change)="validarInicio(dia)">
+            <input type="number" [(ngModel)]="dia.fin" (change)="validarFin(dia)">
+            <button class="cambiar-estado" (click)="cambiarEstado(i)">Cambiar Estado</button>
+        </div>
+    </div>
+    <button class="actualizar" (click)="actualizarHorarios()">Actualizar Horario Disponible</button>
+    <p class="mensaje" *ngIf="mensaje != ''">{{mensaje}}</p>
+</div>
+<app-spinner *ngIf="actualizando" [mensaje]="'Actualizando'"></app-spinner>
+

@@ -2,12 +2,12 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { confirmarClave, usuarioExiste } from 'src/app/validators/validators';
+import { confirmarClave} from 'src/app/validators/validators';
 import { EspecialidadesSeleccion } from 'src/app/interfaces/especialidad-seleccion';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
-import { Usuario } from 'src/app/interfaces/usuario';
+import { Horario, Usuario, Dia } from 'src/app/interfaces/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { NgxCaptchaModule } from 'ngx-captcha';
+
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +20,6 @@ export class RegistroComponent {
   public obraSocialControl: AbstractControl | null;
 
   public tipo: string = "";
-  public captcha?: string;
   public especialidades: EspecialidadesSeleccion[] = [];
   public posiblesEspecialidades: Array<any> = [];
   public generando: boolean = false;
@@ -34,7 +33,7 @@ export class RegistroComponent {
             private auth: Auth,
             private cdr: ChangeDetectorRef) {
     this.formularioRegistro = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email], usuarioExiste(this.auth)),
+      email: new FormControl("", [Validators.required, Validators.email]),//, usuarioExiste(this.auth)),
       nombre: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       apellido: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       obraSocial: new FormControl("", [Validators.required]),
@@ -44,6 +43,7 @@ export class RegistroComponent {
       repetirPassword: new FormControl("", [Validators.minLength(16), Validators.required]),
       imagen1: new FormControl(null, [Validators.required]),
       imagen2: new FormControl(null, [Validators.required]),
+      recaptcha: new FormControl (null, [Validators.required])
     }, [confirmarClave()]);
 
     this.imagen2Control = this.formularioRegistro.get('imagen2');
@@ -102,26 +102,34 @@ export class RegistroComponent {
     }
   }
 
-  generarUsuario(){
+  async generarUsuario(){
     this.generando = true;
     this.limpiarEspacios();
     let datos = this.formularioRegistro.value;
 
-    createUserWithEmailAndPassword(this.auth, datos.email, datos.password)
-    .then((datosUsuario) => {
-      datos.id = datosUsuario.user.uid;
-      this.guardarEnBaseDatos(datos);
-      return sendEmailVerification(datosUsuario.user);
-    })
-    .then(() => {
+    if(await this.db.usuarioExiste(datos.email))
+    {
+      this.formularioRegistro.get('email')?.setErrors({usuarioExiste: true});
       this.generando = false;
-      this.mensaje = "Se Genero El Usuario Exitosamente. Se Envio Mail de Verificacion de Cuenta";
-    })
-    .catch((error) => {
-      this.generando = false;
-      this.mensaje = "Error, Base de Datos Fuera de Servicio, vuelva a intentarlo en unos minutos";
-      console.error('Registration failed:', error);
-    });
+    }
+    else{
+      createUserWithEmailAndPassword(this.auth, datos.email, datos.password)
+      .then((datosUsuario) => {
+        datos.id = datosUsuario.user.uid;
+        this.guardarEnBaseDatos(datos);
+        //return sendEmailVerification(datosUsuario.user);
+        return true;
+      })
+      .then(() => {
+        this.generando = false;
+        this.mensaje = "Se Genero El Usuario Exitosamente. Se Envio Mail de Verificacion de Cuenta";
+      })
+      .catch((error) => {
+        this.generando = false;
+        this.mensaje = "Error, Base de Datos Fuera de Servicio, vuelva a intentarlo en unos minutos";
+        console.error('Registration failed:', error);
+      });
+    }
   }
 
   private guardarEnBaseDatos(datos: Usuario){
@@ -144,6 +152,20 @@ export class RegistroComponent {
 
       case "especialista":
         usuario.especialidades = this.especialidades.map(datos => datos.especialidad.nombre);
+        usuario.horarios = [];
+        for(let item of usuario.especialidades){
+          usuario.horarios.push({
+            especialidad: item,
+            tiempo: 30,
+            dias: [{nombre: "lunes", estado: true, inicio: 8, fin: 19},
+              {nombre: "martes", estado: true, inicio: 8, fin: 19},
+              {nombre: "miercoles", estado: true, inicio: 8, fin: 19},
+              {nombre: "jueves", estado: true, inicio: 8, fin: 19},
+              {nombre: "viernes", estado: true, inicio: 8, fin: 19},
+              {nombre: "sabado", estado: true, inicio: 8, fin: 14},
+            ]
+          });
+        }
         usuario.habilitado = false;
         break;
     }
@@ -208,9 +230,5 @@ export class RegistroComponent {
     else{
       this.imagen2 = $event.target.files[0];
     }
-  }
-
-  handleCaptcha(token: string) {
-    this.captcha = token;
   }
 }

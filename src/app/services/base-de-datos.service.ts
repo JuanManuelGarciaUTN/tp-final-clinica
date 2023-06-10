@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, getDoc, setDoc, updateDoc} from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Firestore, collection, collectionData, doc, docSnapshots, getDoc, setDoc, updateDoc} from '@angular/fire/firestore';
+import { Observable, map } from 'rxjs';
 import { Especialidad } from '../interfaces/especialidad';
-import { Usuario } from '../interfaces/usuario';
+import { Horario, Usuario } from '../interfaces/usuario';
 import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
+import { DocumentData, DocumentReference, getDocs, or, orderBy, query, where } from 'firebase/firestore';
+import { Turno } from '../interfaces/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +18,28 @@ export class BaseDeDatosService {
     return getDoc(doc(this.firestore, "usuarios", id));
   }
 
+  asignarDatosUsuario(id: string): Observable<Usuario|undefined> {
+    const docRef = doc(this.firestore, 'usuarios', id);
+    return docSnapshots(docRef).pipe(
+      map((docSnapshot) => {
+        if (docSnapshot.exists()) {
+          return docSnapshot.data() as Usuario;
+        }
+        return undefined;
+      })
+    );
+  }
+
   obtenerUsuarios(){
     const coleccion = collection(this.firestore, "usuarios");
-    return collectionData(coleccion, {idField: 'id'}) as Observable<Usuario[]>;
+    const q = query(coleccion, orderBy("tipo", "desc"))
+    return collectionData(q, {idField: 'id'}) as Observable<Usuario[]>;
+  }
+
+  obtenerEspecialistas(){
+    const coleccion = collection(this.firestore, "usuarios");
+    const q = query(coleccion, where("tipo", "==", "especialista"))
+    return collectionData(q, {idField: 'id'}) as Observable<Usuario[]>;
   }
 
   obtenerEspecialidades(){
@@ -52,10 +73,44 @@ export class BaseDeDatosService {
     return updateDoc(documento, {habilitado: estado});
   }
 
+  actualizarHorarios(id: string, nuevoHorario: Horario[]){
+    const documento = doc(this.firestore, "usuarios", id);
+    return updateDoc(documento, {horarios: nuevoHorario});
+  }
+
   async subirArchivos(foto: File, nombre: string) : Promise<string> {
     const storageRef = ref(this.storage, `imagenes/${nombre}`);
     const snapshot = await uploadBytesResumable(storageRef, foto);
     const downloadUrl = await getDownloadURL(storageRef);
     return downloadUrl;
   }
+
+  async usuarioExiste(email: string): Promise<boolean> {
+    const coleccion = collection(this.firestore, "usuarios");
+    const q = query(coleccion, where("email", "==", email));
+    const datos = await getDocs(q);
+    return datos.size !== 0;
+  }
+
+  obtenerTurnosAdmin(){
+    const coleccion = collection(this.firestore, "turnos");
+    return collectionData(coleccion, {idField: 'id'}) as Observable<Turno[]>;
+  }
+
+  obtenerTurnosPaciente(id: string){
+    const now = new Date();
+    const utcString = now.toUTCString();
+    const coleccion = collection(this.firestore, "turnos");
+    const q = query(coleccion, or(where("paciente", "==", id), where("fecha", ">=", utcString)));
+    return collectionData(coleccion, {idField: 'id'}) as Observable<Turno[]>;
+  }
+
+  obtenerTurnosEspecialista(id: string){
+    const coleccion = collection(this.firestore, "turnos");
+    const q = query(coleccion, where("especialista", "==", id));
+    return collectionData(coleccion, {idField: 'id'}) as Observable<Turno[]>;
+  }
 }
+
+
+

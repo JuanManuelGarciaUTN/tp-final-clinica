@@ -17,7 +17,7 @@ label {
   }
 
   .br{
-    display: block;
+    display: inline-block;
   }
 
   div{
@@ -33,6 +33,7 @@ label {
     align-items: center;
     justify-content: center;
     margin: 10px 10px;
+    min-width: 500px;
     background-color: whitesmoke;
     border-radius: 20px;
     padding: 10px 15px 15px;
@@ -46,6 +47,10 @@ label {
     background-color: white;
     border-radius: 10px;
     border: 1px solid black;
+  }
+
+  .titulo-foto{
+    font-size: 14px;
   }
 
   img{

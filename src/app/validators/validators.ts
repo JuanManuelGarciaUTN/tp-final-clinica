@@ -25,103 +25,28 @@ export function confirmarClave(): ValidatorFn
   }
 }
 
-/*export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn
-{
-  return (control: AbstractControl) =>{
-    let timer: NodeJS.Timeout | null = null;
-
-    return new Promise<ValidationErrors | null>((resolve, reject) => {
-      control.valueChanges.subscribe(() => {
-        if (timer) {
-          clearTimeout(timer);
-        }
-    
-        timer = setTimeout(() => {
-          const email = control.value.toLowerCase();
-          console.log("llamada al server");
-          fetchSignInMethodsForEmail(auth, email)
-          .then((listaEmails) => {
-              if (listaEmails.length > 0) {
-                resolve({ usuarioExiste: true });
-              } else {
-                resolve(null);
-              }
-            })
-          .catch((error) => {
-              reject({ error: error });
-            });
-        }, espera);
-      });
-    });
-  };
-}
-/*export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn {
-  return (control: AbstractControl) => {
-    return new Promise<ValidationErrors | null>((resolve, reject) => {
-      control.valueChanges.pipe(debounceTime(espera)).subscribe(() => {
-        const email = control.value.toLowerCase();
-        console.log("llamada al server");
-        fetchSignInMethodsForEmail(auth, email)
-          .then((listaEmails) => {
-            if (listaEmails.length > 0) {
-              resolve({ usuarioExiste: true });
-            } else {
-              resolve(null);
-            }
-          })
-          .catch((error) => {
-            reject({ error: error });
-          });
-      });
-    });
-  };
-}*/
-export function usuarioExiste(auth: Auth, espera: number = 2000): AsyncValidatorFn {
-  let serverCallInProgress = false;
-
-  return (control: AbstractControl) => {
-    return new Promise<ValidationErrors | null>((resolve, reject) => {
-      control.valueChanges
-        .pipe(
-          debounceTime(espera),
-          distinctUntilChanged(),
-          switchMap((value) => {
-            if (serverCallInProgress) {
-              return new Promise<ValidationErrors | null>(() => {});
-            }
-
-            serverCallInProgress = true;
-            const email = value.toLowerCase();
-            console.log('llamada al servidor');
-            return fetchSignInMethodsForEmail(auth, email).then((listaEmails) => {
-              return listaEmails.length > 0 ? { usuarioExiste: true } : null;
-            });
-          }),
-          take(1),
-          finalize(() => {
-            serverCallInProgress = false;
-          })
-        )
-        .subscribe(
-          (result) => {
-            resolve(result);
-          },
-          (error) => {
-            reject({ error: error });
-          }
-        );
-    });
-  };
-}
-
 export function validarImagen(): ValidatorFn {
   return (formControl: AbstractControl): ValidationErrors | null => {
     const file = formControl.value;
-
-    if (file && !/\.(jpe?g|png)$/i.test(file.name)) {
+    let extension = file.split(".");
+    extension = extension[extension.length-1];
+    if ( extension != "png" && extension != "jpeg" && extension != "jpg" && extension != "jfif" && extension != "pjpeg") {
       return { invalidExtension: true };
     }
 
     return null;
   };
+  /*"* Botones de Acceso rápido
+ - Debe ser botones favbutton. Este debe tener una animación al mostrar las opciones de usuarios
+ - Debe tener la imagen de perfil del usuario
+ - Debe estar en la esquina inferior izquierda de la pantalla login. 
+      6 usuarios. (3 pacientes, 2 especialistas, 1 admin)
+
+* Registro de usuarios
+ - Al ingresar a la página solo se deben ver 2 botones 
+      con la imagen que represente un paciente o especialista,
+      según esa elección mostrará el formulario correspondiente.
+- Estas imagenes tienen que estar en botones rectangulares uno al abajo del otro. 
+      Al hacer click el formulario debe aparecer con una aminación.*/
 }
+

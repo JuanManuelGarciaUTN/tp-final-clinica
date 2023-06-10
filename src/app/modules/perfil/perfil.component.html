@@ -1,1 +1,2 @@
-<p>Bienvenido {{nombre}}</p>
+<app-detalle-usuario class="detalles" [usuario]="datos"></app-detalle-usuario>
+<button *ngIf="datos?.tipo == 'especialista'" (click)="enviarAGestionarHorarios()" class="gestionar">Mis Horarios</button>

@@ -37,15 +37,15 @@
 </div>
 <div class="contenedor-imagenes">
     <div class="imagen" *ngIf="imagen1">
-        <label class="br">Foto Perfil</label>
+        <label class="br titulo-foto">Foto Perfil</label>
         <img [src]="imagen1" alt="foto perfil">
     </div>
     <div class="imagen" *ngIf="imagen2">
-        <label class="br">Foto Secundaria</label>
+        <label class="br titulo-foto">Foto Secundaria</label>
         <img [src]="imagen2" alt="foto secundaria">
     </div>
 </div>
-<button *ngIf="tipo == 'especialista'" 
+<button *ngIf="esAdmin && tipo == 'especialista'" 
     (click)="cambiarEstado()" 
     [disabled]="cargando"
     [ngClass]="{activo: habilitado}">

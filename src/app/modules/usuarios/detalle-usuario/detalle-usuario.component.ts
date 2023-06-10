@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-detalle-usuario',
@@ -13,11 +14,15 @@ export class DetalleUsuarioComponent {
   public cargando: boolean = false;
   public mensajeEstadoEspecialista = "";
 
-  constructor(private db: BaseDeDatosService) {}
+  constructor(private db: BaseDeDatosService, private permisos: UsuarioService) {}
 
   @Input() set usuario(value: Usuario | undefined){
     this._usuario = value;
     this.mensajeEstadoEspecialista = value?.habilitado ? "Deshabilitar" : "Habilitar";
+  }
+
+  get esAdmin(){
+    return this.permisos.datos?.tipo == "admin";
   }
 
   get nombre(){

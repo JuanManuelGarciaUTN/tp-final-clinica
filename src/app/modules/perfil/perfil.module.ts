@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfilComponent } from './perfil.component';
+import { UsuariosModule } from '../usuarios/usuarios.module';
 
 
 
@@ -9,7 +10,8 @@ import { PerfilComponent } from './perfil.component';
     PerfilComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    UsuariosModule
   ]
 })
 export class PerfilModule { }

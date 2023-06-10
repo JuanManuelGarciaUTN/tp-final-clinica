@@ -9,8 +9,22 @@ export interface Usuario {
     edad: string,
     obraSocial?: string,
     especialidades?: string[],
+    horarios?: Horario[]
     email: string, 
     imagen1: any,
     imagen2?: any,
     habilitado?: boolean
+}
+
+export interface Horario{
+    especialidad: string,
+    tiempo: number,
+    dias: Dia[]
+}
+
+export interface Dia{
+    nombre: string,
+    estado: boolean,
+    inicio: number,
+    fin: number,
 }

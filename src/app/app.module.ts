@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireModule} from '@angular/fire/compat';
-import { DniFormatoPipe } from './pipes/dni-formato.pipe'
+import { DniFormatoPipe } from './pipes/dni-formato.pipe';
 
 @NgModule({
   declarations: [

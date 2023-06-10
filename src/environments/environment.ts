@@ -6,4 +6,6 @@ export const environment = {
     storageBucket: "clinica-tp-final.appspot.com",
     messagingSenderId: "861938174086",
     appId: "1:861938174086:web:33c9f930f1aab7231be907"
-  },};
+  }
+};
+  

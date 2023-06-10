@@ -1,0 +1,22 @@
+<h3>Solicitar Turnos</h3>
+<div class="opciones">
+    <h4>Especialidades</h4>
+    <button *ngFor="let item of especialidades | async" 
+        (click)="seleccionarEspecialidad(item.nombre)" 
+        [ngClass]="{activo: especialidad == item.nombre}"
+        >
+        {{item.nombre}}
+    </button>
+</div>
+<div class="opciones" *ngIf="especialidad">
+    <h4>Especialialistas</h4>
+    <button *ngFor="let item of especialistas" 
+        (click)="seleccionarEspecialista(item)" 
+        [ngClass]="{activo: especialista?.id === item.id}"
+        >
+        {{item.nombre}}
+    </button>
+</div>
+<div class="opciones" *ngIf="especialista">
+    <h4>Dias Disponibles</h4>
+</div>
