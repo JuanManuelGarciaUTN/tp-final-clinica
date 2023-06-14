@@ -1,0 +1,15 @@
+
+<button *ngIf="pacienteSeleccionado" class="top-boton" (click)="volver()">Volver</button>
+<div *ngIf="!pacienteSeleccionado" class="titulo">
+    <h4>Pacientes</h4>
+    <div class="opciones">
+        <button *ngFor="let item of pacientes | async" 
+            (click)="seleccionarPaciente(item)" 
+            [ngClass]="{activo: pacienteSeleccionado == item}"
+            >
+            <p>{{item.nombre + " " + item.apellido}}</p>
+            <p>{{item.dni}}</p>
+        </button>
+    </div>
+</div>
+<app-solicitar-turno *ngIf="pacienteSeleccionado" [paciente]="pacienteSeleccionado"></app-solicitar-turno>

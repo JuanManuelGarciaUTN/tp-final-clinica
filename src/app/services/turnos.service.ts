@@ -12,47 +12,29 @@ export class TurnosService {
 
   private _turnos: Turno[] = [];
   private sub?: Subscription;
-  private _especialista?: Usuario;
 
-  constructor(private usuario: UsuarioService, private db: BaseDeDatosService) {
-    this.usuario.testingPaciente();
-  }
-
-  set especialista(value: Usuario){
-    if(value.tipo == "especialista"){
-      this._especialista = value;
-      this.filtrarPorDisponibilidadEspecialista();
-    }
-  }
+  constructor(private usuario: UsuarioService, private db: BaseDeDatosService) {}
 
   public turnos(){
     return this._turnos;
   }
 
-  private filtrarPorDisponibilidadEspecialista(){
-    if(this._especialista){
-
-    }
-  }
-
   ngOnInit(){
-    if(true || this.usuario.datos?.tipo == "admin"){
+    if(this.usuario.datos?.tipo == "admin"){
       this.sub = this.db.obtenerTurnosAdmin().subscribe(turnos=>{
         this._turnos = turnos;
-        this.filtrarPorDisponibilidadEspecialista();
       })
     }
-    /*else if(this.usuario.datos?.tipo == "paciente"){
+    else if(this.usuario.datos?.tipo == "paciente"){
       this.sub = this.db.obtenerTurnosPaciente(this.usuario.datos.id).subscribe(turnos=>{
         this._turnos = turnos;
-        this.filtrarPorDisponibilidadEspecialista();
       })
     }
     else if(this.usuario.datos){
       this.sub = this.db.obtenerTurnosEspecialista(this.usuario.datos.id).subscribe(turnos=>{
         this._turnos = turnos;
       })
-    }*/
+    }
   }
 
   ngDestroy(){

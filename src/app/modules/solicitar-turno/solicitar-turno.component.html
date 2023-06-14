@@ -1,22 +1,41 @@
 <h3>Solicitar Turnos</h3>
-<div class="opciones">
+<div class="titulo">
     <h4>Especialidades</h4>
-    <button *ngFor="let item of especialidades | async" 
-        (click)="seleccionarEspecialidad(item.nombre)" 
-        [ngClass]="{activo: especialidad == item.nombre}"
-        >
-        {{item.nombre}}
-    </button>
+    <div class="opciones">
+        <button *ngFor="let item of especialidades | async" 
+            (click)="seleccionarEspecialidad(item.nombre)" 
+            [ngClass]="{activo: especialidadSeleccionada == item.nombre}"
+            >
+            {{item.nombre}}
+        </button>
+    </div>
 </div>
-<div class="opciones" *ngIf="especialidad">
+<div class="titulo" *ngIf="especialidadSeleccionada">
     <h4>Especialialistas</h4>
-    <button *ngFor="let item of especialistas" 
-        (click)="seleccionarEspecialista(item)" 
-        [ngClass]="{activo: especialista?.id === item.id}"
-        >
-        {{item.nombre}}
-    </button>
+    <div class="opciones">
+        <button *ngFor="let item of especialistas" 
+            (click)="seleccionarEspecialista(item)" 
+            [ngClass]="{activo: especialistaSeleccionado?.id === item.id}"
+            >
+            {{item.nombre}}
+        </button>
+    </div>
 </div>
-<div class="opciones" *ngIf="especialista">
+<div class="titulo" *ngIf="especialistaSeleccionado">
     <h4>Dias Disponibles</h4>
+    <div class="opciones">
+        <button *ngFor="let item of diasDisponibles" 
+        (click)="seleccionarDia(item)" 
+        [ngClass]="{activo: diaSeleccionado === item}"
+        >
+        {{item| date: 'd/M HH:mm' : "-0300"}}
+        </button>
+    </div>
+</div>
+<button (click)="sacarTurno()" [disabled]="!(diaSeleccionado && especialidadSeleccionada && especialistaSeleccionado)">Sacar Turno</button>
+<div *ngIf="mensaje" class="pantalla-completa">
+    <div class="mensaje">
+        <p>{{mensaje}}</p>
+        <button (click)="finalizarRegistro()">Ok</button>
+    </div>
 </div>

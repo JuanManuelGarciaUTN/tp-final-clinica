@@ -1,0 +1,51 @@
+.top-boton{
+    position: absolute;
+    left: 1%;
+}
+
+.titulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.opciones {
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: 50vh;
+    max-width: 80vw;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    overflow-y: auto;
+}
+
+:host{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+p{
+    margin: 0px;
+}
+
+button {
+    margin: 5px;
+    width: 200px;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.activo {
+    background-color: #3485c3;
+    color: #fff;
+}

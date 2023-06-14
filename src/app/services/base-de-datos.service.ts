@@ -5,7 +5,7 @@ import { Especialidad } from '../interfaces/especialidad';
 import { Horario, Usuario } from '../interfaces/usuario';
 import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { DocumentData, DocumentReference, getDocs, or, orderBy, query, where } from 'firebase/firestore';
-import { Turno } from '../interfaces/turno';
+import { Estado, Turno } from '../interfaces/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,12 @@ export class BaseDeDatosService {
   obtenerEspecialistas(){
     const coleccion = collection(this.firestore, "usuarios");
     const q = query(coleccion, where("tipo", "==", "especialista"))
+    return collectionData(q, {idField: 'id'}) as Observable<Usuario[]>;
+  }
+
+  obtenerPacientes(){
+    const coleccion = collection(this.firestore, "usuarios");
+    const q = query(coleccion, where("tipo", "==", "paciente"))
     return collectionData(q, {idField: 'id'}) as Observable<Usuario[]>;
   }
 
@@ -109,6 +115,25 @@ export class BaseDeDatosService {
     const coleccion = collection(this.firestore, "turnos");
     const q = query(coleccion, where("especialista", "==", id));
     return collectionData(coleccion, {idField: 'id'}) as Observable<Turno[]>;
+  }
+
+  agregarTurno(paciente: Usuario, especialista: Usuario, especialidad: string, fecha: Date){
+    const coleccion = collection(this.firestore, "turnos");
+    const documentoNuevo = doc(coleccion);
+    const nuevoId = documentoNuevo.id;
+    const duracion = especialista.horarios?.find(d => d.especialidad === especialidad);
+
+    setDoc(documentoNuevo, {
+      id: nuevoId,
+      idPaciente: paciente.id,
+      nombrePaciente: paciente.nombre + " " + paciente.apellido,
+      idEspecialista: especialista.id,
+      nombreEspecialista: especialista.nombre + " " + especialista.apellido,
+      tipo: especialidad,
+      fecha: fecha.toUTCString(),
+      duracion: duracion?.tiempo,
+      estado: Estado.pendiente
+    });
   }
 }
 
