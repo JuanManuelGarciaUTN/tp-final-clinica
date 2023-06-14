@@ -19,14 +19,16 @@ Nuestros pacientes podran:
 
 ### Como Especialista Medico
 Nuestro especialistas podran:
-    -Ver Turnos Pendientes de Aceptación
-    -Ver Turnos Futuros
-    -Rechazar Turnos
-    -Cancelar Turnos
-    -Aceptar Turnos
-    -Registrar Evaluaciones de la Consulta
-    -Administrar Sus Horarios Disponibles
-    -Visualizar su Información Personal
+|  | Funciones |
+|-----:|-----------|
+| 1 | -Ver Turnos Pendientes de Aceptación |
+| 2 |-Ver Turnos Futuros |
+| 3 |-Rechazar Turnos |
+| 4 |-Cancelar Turnos |
+| 5 |-Aceptar Turnos |
+| 6 |-Registrar Evaluaciones de la Consulta |
+| 7 |-Administrar Sus Horarios Disponibles |
+| 8 |-Visualizar su Información Personal |
 
 ### Como Administrador
 Nuestros administradores podran:
