@@ -37,7 +37,7 @@ export class LoginComponent {
       .then((datosUsuario) =>{
         if(datosUsuario.user)
         {
-          if(true || datosUsuario.user.emailVerified){
+          if(datosUsuario.user.emailVerified){
             this.usuario.obtenerDatos()
             .then(datos=>{
               if(datos.tipo == "especialista" && !datos.habilitado){

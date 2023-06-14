@@ -127,10 +127,11 @@ export class SolicitarTurnoComponent {
     
           const finHora = new Date(diaActual);
           finHora.setHours(dia.fin+3, 0, 0, 0);
+          finHora.setMinutes(finHora.getMinutes() - horario.tiempo);
 
           let horaActual = new Date(inicioHora);
 
-          while (horaActual < finHora) {
+          while (horaActual <= finHora) {
             
             turnosDisponibles.push(new Date(horaActual));
             horaActual.setMinutes(horaActual.getMinutes() + horario.tiempo);
