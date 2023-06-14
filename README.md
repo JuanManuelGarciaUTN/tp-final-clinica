@@ -9,17 +9,19 @@ La Clinica On-Line permite facilitar la generación, gestion y visualizado de tu
 
 ### Como Paciente
 Nuestros pacientes podran: 
-    -Sacar Turnos
-    -Ver Estado Turnos
-    -Cancelar Turnos
-    -Ver Resultado de la Consulta
-    -Dejar Evaluación de la Consulta
-    -Mantener un Historial de Consultas
-    -Visualizar su Información Personal
+|  | Funciones Paciente|
+|-----:|-----------|
+| 1 |-Sacar Turnos |
+| 2 |-Ver Estado Turnos |
+| 3 |-Cancelar Turnos |
+| 4 |-Ver Resultado de la Consulta|
+| 5 |-Dejar Evaluación de la Consulta|
+| 6 |-Mantener un Historial de Consultas|
+| 7 |-Visualizar su Información Personal|
 
 ### Como Especialista Medico
 Nuestro especialistas podran:
-|  | Funciones |
+|  | Funciones Especialista|
 |-----:|-----------|
 | 1 | -Ver Turnos Pendientes de Aceptación |
 | 2 |-Ver Turnos Futuros |
@@ -32,10 +34,12 @@ Nuestro especialistas podran:
 
 ### Como Administrador
 Nuestros administradores podran:
-    -Ver Todos los turnos futuros y pasados
-    -Acceder a la Información de los Turnos
-    -Cancelar Turnos
-    -Sacar Turnos para un Paciente
-    -Administrar la Habilitación de Especialistas
-    -Visualizar los Usuarios Registrados
-    -Visualizar su Información Personal
+|  | Funciones Administrador|
+|-----:|-----------|
+| 1 |-Ver Todos los turnos futuros y pasados|
+| 2 |-Acceder a la Información de los Turnos|
+| 3 |-Cancelar Turnos|
+| 4 |-Sacar Turnos para un Paciente|
+| 5 |-Administrar la Habilitación de Especialistas|
+| 6 |-Visualizar los Usuarios Registrados|
+| 7 |-Visualizar su Información Personal|
