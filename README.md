@@ -5,7 +5,7 @@
 ## Deploy: https://clinica-tp-final.firebaseapp.com/
 
 ## Clinica On-Line
-La Clinica On-Line permite facilitar la generación, gestion y visualizado de turnos medicos con nuestros especialistas en diversas areas de medicina.
+### La Clinica On-Line permite facilitar la generación, gestion y visualizado de turnos medicos con nuestros especialistas en diversas areas de medicina.
 
 ### Como Paciente
 Nuestros pacientes podran: 
