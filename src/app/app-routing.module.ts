@@ -13,6 +13,7 @@ import { GestionarHorariosComponent } from './modules/gestionar-horarios/gestion
 import { EspecialistaGuard } from './guards/especialista.guard';
 import { SolicitarTurnoComponent } from './modules/solicitar-turno/solicitar-turno.component';
 import { AdminComponent } from './modules/solicitar-turno/admin/admin.component';
+import { HistorialTurnosComponent } from './modules/historial-turnos/historial-turnos.component';
 
 const routes: Routes = [
   { path: "", component:BienvenidaComponent, canActivate: [NoLogueadoGuard]},
@@ -45,7 +46,7 @@ const routes: Routes = [
     path: "gestionar-horarios", 
     component: GestionarHorariosComponent,
     loadChildren: () => import('./modules/gestionar-horarios/gestionar-horarios.module').then(m => m.GestionarHorariosModule),
-    //canActivate: [EspecialistaGuard]
+    canActivate: [EspecialistaGuard]
   },
   { 
     path: "solicitar-turno", 
@@ -57,6 +58,12 @@ const routes: Routes = [
     path: "solicitar-turno/admin", 
     component: AdminComponent,
     loadChildren: () => import('./modules/solicitar-turno/solicitar-turno.module').then(m => m.SolicitarTurnoModule),
+    //canActivate: [EspecialistaGuard]
+  },
+  { 
+    path: "historial-turnos", 
+    component: HistorialTurnosComponent,
+    loadChildren: () => import('./modules/historial-turnos/historial-turnos.module').then(m => m.HistorialTurnosModule),
     //canActivate: [EspecialistaGuard]
   },
 ];

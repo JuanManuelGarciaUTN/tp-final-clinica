@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Especialidad } from 'src/app/interfaces/especialidad';
-import { Turno } from 'src/app/interfaces/turno';
+import { Estado, Turno } from 'src/app/interfaces/turno';
 import { Horario, Usuario } from 'src/app/interfaces/usuario';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { TurnosDisponiblesService } from 'src/app/services/turnos-disponibles.service';
@@ -28,9 +28,7 @@ export class SolicitarTurnoComponent {
    
 
   constructor(private usuario: UsuarioService, 
-              private db: BaseDeDatosService, 
-              private turnos: TurnosService,
-              private generarTurnos: TurnosDisponiblesService,
+              private db: BaseDeDatosService,
               private router: Router) { 
     if(this.usuario.datos?.tipo == "paciente"){
       this._paciente = this.usuario.datos;
@@ -148,10 +146,11 @@ export class SolicitarTurnoComponent {
     for(let dia of base){
       let disponible = true;
       for(let turno of turnos){
-        if(this.compararTurnoFecha(dia, turno, duracion)){
-          console.log("ACA");
-          disponible = false;
-          break;
+        if(turno.estado != Estado.canceladoAdmin && turno.estado != Estado.canceladoEspecialista && turno.estado != Estado.canceladoPaciente && turno.estado != Estado.rechazado){
+          if(this.compararTurnoFecha(dia, turno, duracion)){
+            disponible = false;
+            break;
+          }
         }
       }
       if(disponible){

@@ -105,16 +105,15 @@ export class BaseDeDatosService {
 
   obtenerTurnosPaciente(id: string){
     const now = new Date();
-    const utcString = now.toUTCString();
     const coleccion = collection(this.firestore, "turnos");
-    const q = query(coleccion, or(where("paciente", "==", id), where("fecha", ">=", utcString)));
-    return collectionData(coleccion, {idField: 'id'}) as Observable<Turno[]>;
+    const q = query(coleccion, or(where("idPaciente", "==", id)));
+    return collectionData(q, {idField: 'id'}) as Observable<Turno[]>;
   }
 
   obtenerTurnosEspecialista(id: string){
     const coleccion = collection(this.firestore, "turnos");
-    const q = query(coleccion, where("especialista", "==", id));
-    return collectionData(coleccion, {idField: 'id'}) as Observable<Turno[]>;
+    const q = query(coleccion, where("idEspecialista", "==", id));
+    return collectionData(q, {idField: 'id'}) as Observable<Turno[]>;
   }
 
   agregarTurno(paciente: Usuario, especialista: Usuario, especialidad: string, fecha: Date){
@@ -127,6 +126,7 @@ export class BaseDeDatosService {
       id: nuevoId,
       idPaciente: paciente.id,
       nombrePaciente: paciente.nombre + " " + paciente.apellido,
+      dniPaciente: paciente.dni,
       idEspecialista: especialista.id,
       nombreEspecialista: especialista.nombre + " " + especialista.apellido,
       tipo: especialidad,
@@ -134,6 +134,31 @@ export class BaseDeDatosService {
       duracion: duracion?.tiempo,
       estado: Estado.pendiente
     });
+  }
+
+  actualizarEstadoTurno(turno: Turno, nuevoEstado: Estado){
+      const documento = doc(this.firestore, "turnos", turno.id);
+      return updateDoc(documento, {estado: nuevoEstado});
+  }
+
+  agregarMensajeCancelacionTurno(turno: Turno, mensaje: string){
+    const documento = doc(this.firestore, "turnos", turno.id);
+    return updateDoc(documento, {mensajeCancelacion: mensaje});
+  }
+
+  agregarMensajeEncuestaTurno(turno: Turno, mensaje: string){
+    const documento = doc(this.firestore, "turnos", turno.id);
+    return updateDoc(documento, {encuesta: mensaje});
+  }
+
+  agregarMensajeReseniaTurno(turno: Turno, mensaje: string){
+    const documento = doc(this.firestore, "turnos", turno.id);
+    return updateDoc(documento, {resenia: mensaje});
+  }
+
+  agregarMensajeCalificacionTurno(turno: Turno, mensaje: string){
+    const documento = doc(this.firestore, "turnos", turno.id);
+    return updateDoc(documento, {calificacion: mensaje});
   }
 }
 
