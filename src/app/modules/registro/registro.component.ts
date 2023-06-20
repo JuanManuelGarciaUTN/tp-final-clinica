@@ -33,7 +33,7 @@ export class RegistroComponent {
             private auth: Auth,
             private cdr: ChangeDetectorRef) {
     this.formularioRegistro = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.email]),//, usuarioExiste(this.auth)),
+      email: new FormControl("", [Validators.required, Validators.email]),
       nombre: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       apellido: new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z\\s]+$")]),
       obraSocial: new FormControl("", [Validators.required]),

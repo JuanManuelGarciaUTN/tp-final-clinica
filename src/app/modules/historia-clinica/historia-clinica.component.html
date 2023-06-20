@@ -1,0 +1,19 @@
+<h2 *ngIf="datos && datos.tipo == 'paciente'">Historia Clinica de {{datos.nombre + " " + datos.apellido}}</h2>
+<div class="historia" *ngFor="let item of turnos">
+    <p><strong>Fecha: </strong>{{item.fecha | date : 'd/M HH:mm' : "-0300"}}</p>
+    <p><strong>Especialista: </strong>{{item.nombreEspecialista}}</p>
+    <p><strong>Consulta: </strong>{{item.tipo}}</p>
+    <p><strong>Altura: </strong>{{item.historiaClinica?.altura}}</p>
+    <p><strong>Peso: </strong>{{item.historiaClinica?.peso}}</p>
+    <p><strong>Temperatura: </strong>{{item.historiaClinica?.temperatura}}°C</p>
+    <p><strong>Presión: </strong>{{item.historiaClinica?.presionMax}} / {{item.historiaClinica?.presionMin}}</p>
+    <p *ngIf="validarDatoOpcional(item.historiaClinica?.dato1)">
+        <strong>{{item.historiaClinica?.dato1?.clave}}: </strong>{{item.historiaClinica?.dato1?.valor}}
+    </p>
+    <p *ngIf="validarDatoOpcional(item.historiaClinica?.dato2)">
+        <strong>{{item.historiaClinica?.dato2?.clave}}: </strong>{{item.historiaClinica?.dato2?.valor}}
+    </p>
+    <p *ngIf="validarDatoOpcional(item.historiaClinica?.dato3)">
+        <strong>{{item.historiaClinica?.dato3?.clave}}: </strong>{{item.historiaClinica?.dato3?.valor}}
+    </p>
+</div>

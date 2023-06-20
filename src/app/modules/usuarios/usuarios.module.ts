@@ -4,6 +4,7 @@ import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.compo
 import { UsuariosComponent } from './usuarios.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { DniFormatoPipe } from 'src/app/pipes/dni-formato.pipe';
+import { HistoriaClinicaModule } from '../historia-clinica/historia-clinica.module';
 
 
 
@@ -14,7 +15,8 @@ import { DniFormatoPipe } from 'src/app/pipes/dni-formato.pipe';
     ListaUsuariosComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HistoriaClinicaModule
   ],
   exports: [
     DetalleUsuarioComponent

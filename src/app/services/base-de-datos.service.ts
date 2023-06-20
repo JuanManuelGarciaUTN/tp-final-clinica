@@ -5,7 +5,7 @@ import { Especialidad } from '../interfaces/especialidad';
 import { Horario, Usuario } from '../interfaces/usuario';
 import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { DocumentData, DocumentReference, getDocs, or, orderBy, query, where } from 'firebase/firestore';
-import { Estado, Turno } from '../interfaces/turno';
+import { Estado, HistoriaClinica, Turno } from '../interfaces/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -106,7 +106,7 @@ export class BaseDeDatosService {
   obtenerTurnosPaciente(id: string){
     const now = new Date();
     const coleccion = collection(this.firestore, "turnos");
-    const q = query(coleccion, or(where("idPaciente", "==", id)));
+    const q = query(coleccion, where("idPaciente", "==", id));
     return collectionData(q, {idField: 'id'}) as Observable<Turno[]>;
   }
 
@@ -159,6 +159,11 @@ export class BaseDeDatosService {
   agregarMensajeCalificacionTurno(turno: Turno, mensaje: string){
     const documento = doc(this.firestore, "turnos", turno.id);
     return updateDoc(documento, {calificacion: mensaje});
+  }
+
+  agregarHistoriaClinica(turno: Turno, historia: HistoriaClinica){
+    const documento = doc(this.firestore, "turnos", turno.id);
+    return updateDoc(documento, {historiaClinica: historia});
   }
 }
 

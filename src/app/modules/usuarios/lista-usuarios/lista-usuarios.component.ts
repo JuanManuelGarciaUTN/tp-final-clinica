@@ -10,6 +10,7 @@ import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 })
 export class ListaUsuariosComponent {
   @Output() usuarioSeleccionado = new EventEmitter<Usuario>();
+  @Output() usuariosLista = new EventEmitter<Usuario[]>();
 
   public usuarios: Array<Usuario> = [];
   private subToUsuarios?: Subscription;
@@ -19,6 +20,7 @@ export class ListaUsuariosComponent {
   ngOnInit() {
     this.subToUsuarios = this.db.obtenerUsuarios().subscribe(datos=>{
       this.usuarios = datos;
+      this.actualizarLista();
     });
   }
 
@@ -29,5 +31,9 @@ export class ListaUsuariosComponent {
 
   seleccionarUsuario(usuario: Usuario) {
     this.usuarioSeleccionado.emit(usuario);
+  }
+
+  actualizarLista(){
+    this.usuariosLista.emit(this.usuarios);
   }
 }

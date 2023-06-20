@@ -14,6 +14,8 @@ import { EspecialistaGuard } from './guards/especialista.guard';
 import { SolicitarTurnoComponent } from './modules/solicitar-turno/solicitar-turno.component';
 import { AdminComponent } from './modules/solicitar-turno/admin/admin.component';
 import { HistorialTurnosComponent } from './modules/historial-turnos/historial-turnos.component';
+import { HistoriaClinicaComponent } from './modules/historia-clinica/historia-clinica.component';
+import { EspecialistaComponent } from './modules/historia-clinica/especialista/especialista.component';
 
 const routes: Routes = [
   { path: "", component:BienvenidaComponent, canActivate: [NoLogueadoGuard]},
@@ -64,6 +66,18 @@ const routes: Routes = [
     path: "historial-turnos", 
     component: HistorialTurnosComponent,
     loadChildren: () => import('./modules/historial-turnos/historial-turnos.module').then(m => m.HistorialTurnosModule),
+    //canActivate: [EspecialistaGuard]
+  },
+  { 
+    path: "historia-clinica", 
+    component: HistoriaClinicaComponent,
+    loadChildren: () => import('./modules/historia-clinica/historia-clinica.module').then(m => m.HistoriaClinicaModule),
+    //canActivate: [EspecialistaGuard]
+  },
+  { 
+    path: "pacientes", 
+    component: EspecialistaComponent,
+    loadChildren: () => import('./modules/historia-clinica/historia-clinica.module').then(m => m.HistoriaClinicaModule),
     //canActivate: [EspecialistaGuard]
   },
 ];

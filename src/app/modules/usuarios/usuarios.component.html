@@ -1,7 +1,15 @@
 
-<div class="izquierda">
+<div *ngIf="!mostrandoHistoria" class="izquierda">
     <button (click)="enviarARegistro()">Generar Nuevo Usuario</button>
-    <app-lista-usuarios (usuarioSeleccionado)="onSeleccion($event)"></app-lista-usuarios>
+    <app-lista-usuarios (usuarioSeleccionado)="onSeleccion($event)" (usuariosLista)="onListaNueva($event)"></app-lista-usuarios>
+    <button (click)="descargarExcel()">Descargar Datos Excel</button>
 </div>
 
-<app-detalle-usuario class="derecha" [usuario]="usuario"></app-detalle-usuario>
+<app-detalle-usuario *ngIf="!mostrandoHistoria" class="derecha" [usuario]="usuario" (mostrarHistoria)="onMostrarHistoria($event)"></app-detalle-usuario>
+<button *ngIf="mostrandoHistoria" class="top-boton" (click)="volver()">Volver</button>
+<div class="historia">
+    <h2  *ngIf="mostrandoHistoria">Historia Clinica de {{usuario?.nombre + " " + usuario?.apellido}}</h2>
+    <app-historia-clinica *ngIf="mostrandoHistoria && usuario" [paciente]="usuario.id"></app-historia-clinica>
+</div>
+
+

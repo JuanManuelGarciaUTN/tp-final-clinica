@@ -25,6 +25,7 @@ export class SolicitarTurnoComponent {
   public diasDisponibles?: Date[];
   public diaSeleccionado?: Date;
   public mensaje = "";
+  public imagenDefault = "https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/logos-especialidades%2Fdefault.jpg?alt=media&token=600c40ee-db81-45f7-a61f-ff7555475bda";
    
 
   constructor(private usuario: UsuarioService, 

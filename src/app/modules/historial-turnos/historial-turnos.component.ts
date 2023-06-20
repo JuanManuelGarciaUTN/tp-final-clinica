@@ -21,13 +21,15 @@ export class HistorialTurnosComponent {
   public especialidadSeleccionada: string = "";
   public especialistaSeleccionado: string = "";
   public pacienteSeleccionado: string = "";
+  public filtro: string = "";
   private subTurnos?: Subscription;
   public estados = Estado;
   public mensaje = "";
   public tipoMensaje?: Estado;
   public respuestaUsuario = "";
-  private turnoSeleccionado?: Turno;
+  public turnoSeleccionado?: Turno;
   public encuesta?: boolean;
+  public generandoHistoriaClinica = false;
 
   constructor(private usuario: UsuarioService,private db: BaseDeDatosService){
     if(this.usuario.datos?.tipo == "admin"){
@@ -70,22 +72,13 @@ export class HistorialTurnosComponent {
     }
   }
 
-  private filtrarTurnos(){
+  filtrarTurnos(){
     this.turnos = [];
+    let filtros = this.filtro.trim().toLowerCase().split(" ");
     if(this._turnos){
       for(let turno of this._turnos){
-        if(this.especialidadSeleccionada){
-          if(turno.tipo == this.especialidadSeleccionada){
-            this.turnos.push(turno);
-          }
-        }
-        else if(this.especialistaSeleccionado){
-          if(turno.idEspecialista == this.especialistaSeleccionado){
-            this.turnos.push(turno);
-          }
-        }
-        else if(this.pacienteSeleccionado){
-          if(turno.idPaciente == this.pacienteSeleccionado){
+        if(this.filtro != ""){
+          if(this.compararTurnos(turno, filtros)){
             this.turnos.push(turno);
           }
         }
@@ -95,6 +88,44 @@ export class HistorialTurnosComponent {
         }
       }
     }
+  }
+
+  private compararTurnos(turno: Turno, filtros: string[]){
+    let fecha = new Date(turno.fecha);
+    fecha.setHours(fecha.getHours() - 3);
+    let fechaString = fecha.toISOString();
+
+    for(let dato of filtros){      
+      if(!turno.nombrePaciente.toLowerCase().includes(dato) &&
+        !turno.nombreEspecialista.toLowerCase().includes(dato) &&
+        !turno.dniPaciente.toLowerCase().includes(dato) &&
+        !turno.tipo.toLowerCase().includes(dato) &&
+        !turno.historiaClinica?.altura.toString().includes(dato) &&
+        !turno.historiaClinica?.temperatura.toString().includes(dato) &&
+        !turno.historiaClinica?.peso.toString().includes(dato) &&
+        !turno.historiaClinica?.presionMax.toString().includes(dato) &&
+        !turno.historiaClinica?.presionMin.toString().includes(dato) &&
+        !turno.historiaClinica?.dato1?.clave.includes(dato) &&
+        !turno.historiaClinica?.dato1?.valor.includes(dato) &&
+        !turno.historiaClinica?.dato2?.clave.includes(dato) &&
+        !turno.historiaClinica?.dato2?.valor.includes(dato) &&
+        !turno.historiaClinica?.dato3?.clave.includes(dato) &&
+        !turno.historiaClinica?.dato3?.valor.includes(dato) &&
+        !this.compararFecha(fechaString, dato)){
+          return false;
+      }
+    }
+    return true;
+  }
+
+  private compararFecha(fecha: string, dato: string){
+    fecha = fecha.replace(/-/g, "/");
+    fecha = fecha.slice(0,16);
+    let listaDatos = dato.split("/");
+    dato = listaDatos.length == 1 ? listaDatos[0] : (listaDatos[1] == "0" ? "" : listaDatos[1])+"/"+(listaDatos[0] == "0" ? "" : listaDatos[0]);
+
+    console.log(fecha, " | ", dato);
+    return fecha.includes(dato);
   }
 
   private obtenerOpciones(){
@@ -212,9 +243,8 @@ export class HistorialTurnosComponent {
   }
 
   finalizarTurno(turno: Turno){
-    this.mensaje = "Ingrese reseña para el paciente";
-    this.tipoMensaje = Estado.realizado;
     this.turnoSeleccionado = turno;
+    this.generandoHistoriaClinica = true;
   }
 
   cancelarMensaje(){
@@ -265,5 +295,11 @@ export class HistorialTurnosComponent {
     this.mensaje = "Ingrese encuesta";
     this.turnoSeleccionado = turno;
     this.encuesta = true;
+  }
+
+  agregarHistoriaClinica(estado: boolean){
+    this.generandoHistoriaClinica = false;
+    this.mensaje = "Ingrese reseña para el paciente";
+    this.tipoMensaje = Estado.realizado;
   }
 }

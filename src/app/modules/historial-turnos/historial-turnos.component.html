@@ -1,35 +1,8 @@
 <h3>Historial Turnos</h3>
 <div class="titulo">
-    <h4>Filtrar Por Especialidad</h4>
+    <h4>Filtrar Datos</h4>
     <div class="opciones">
-        <button *ngFor="let item of especialidades" 
-            (click)="seleccionarEspecialidad(item)" 
-            [ngClass]="{activo: especialidadSeleccionada == item}"
-        >
-            {{item}}
-        </button>
-    </div>
-</div>
-<div class="titulo" *ngIf="tipoUser != 'especialista'">
-    <h4>Filtrar Por Especialista</h4>
-    <div class="opciones">
-        <button *ngFor="let item of especialistas" 
-            (click)="seleccionarEspecialista(item.id)" 
-            [ngClass]="{activo: especialistaSeleccionado == item.id}"
-        >
-            {{item.nombre}}
-        </button>
-    </div>
-</div>
-<div class="titulo" *ngIf="tipoUser == 'especialista'">
-    <h4>Filtrar Por Paciente</h4>
-    <div class="opciones">
-        <button *ngFor="let item of pacientes" 
-            (click)="seleccionarPaciente(item.id)" 
-            [ngClass]="{activo: pacienteSeleccionado == item.id}"
-        >
-            {{item.nombre}}
-        </button>
+        <input placeholder="Ingrese datos..." type="text" [(ngModel)]="filtro" (input)="filtrarTurnos()">
     </div>
 </div>
 <div class="titulo">
@@ -48,7 +21,7 @@
             <p *ngIf="tipoUser != 'paciente'">{{turno.dniPaciente}}</p>
             <p *ngIf="tipoUser != 'especialista'">{{turno.nombreEspecialista}}</p>
             <p>{{turno.tipo}}</p>
-            <p>{{turno.fecha | date: 'd/M HH:mm' : "-0300"}}</p>
+            <p>{{turno.fecha | date: 'd/MM HH:mm' : "-0300"}}</p>
             <p class="estado">
                 {{turno.estado | estadoTurno}}
             </p>
@@ -84,4 +57,7 @@
         <p>{{mensaje}}</p>
         <button (click)="cancelarMensaje()">Ok</button>
     </div>
+</div>
+<div *ngIf="generandoHistoriaClinica" class="pantalla-completa">
+    <app-generar-historia-clinica *ngIf="generandoHistoriaClinica" [turno]="turnoSeleccionado" (finalizado)="agregarHistoriaClinica($event)"></app-generar-historia-clinica>
 </div>

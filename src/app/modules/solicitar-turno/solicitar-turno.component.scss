@@ -79,3 +79,19 @@ button {
     height: 100vh;
     background-color: rgba($color: #3485c3, $alpha: 0.2);
   }
+
+  .opciones button img{
+     width: 70px;
+     height: 70px;
+  }
+
+  .opciones-imagen{
+    width: 200px;
+    height: 110px;
+  }
+
+  .opciones-imagen p{
+    font-size: 14px;
+    margin: 0px;
+    text-transform: capitalize;
+  }

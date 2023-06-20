@@ -51,6 +51,13 @@
     [ngClass]="{activo: habilitado}">
     {{mensaje}} Especialista
 </button>
+<button *ngIf="esAdmin && tipo == 'paciente'" 
+    (click)="mostrarHistoriaClinica()" 
+    [disabled]="cargando">
+    Mostrar Historia Clinica
+</button>
+
+
 
 
 

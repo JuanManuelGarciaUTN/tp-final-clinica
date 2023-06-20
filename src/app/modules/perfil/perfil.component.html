@@ -1,2 +1,3 @@
+<button *ngIf="datos?.tipo == 'paciente'" (click)="enviarAHistoriaClinica()" class="gestionar">Mi Historia Clínica</button>
 <app-detalle-usuario class="detalles" [usuario]="datos"></app-detalle-usuario>
 <button *ngIf="datos?.tipo == 'especialista'" (click)="enviarAGestionarHorarios()" class="gestionar">Mis Horarios</button>

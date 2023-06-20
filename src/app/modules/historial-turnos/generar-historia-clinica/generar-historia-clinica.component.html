@@ -1,0 +1,65 @@
+<form class="login-form" [formGroup]="formularioRegistro">
+                <div class="datos">
+                    <h3>Nueva Historia Clinica</h3>
+                    <div class="form-group" >
+                        <label for="altura">Altura</label>
+                        <input type="text" id="altura" placeholder="Ingrese altura" formControlName="altura" (input)="formatearNumeros(formularioRegistro.get('altura'))">
+                        <small *ngIf="formularioRegistro.get('altura')?.touched && !formularioRegistro.get('altura')?.valid"> 
+                            Debe Ser Una Altura Entre 40cm y 240cm
+                        </small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="peso">Peso</label>
+                        <input type="text" id="peso" placeholder="Ingrese peso" formControlName="peso" (input)="formatearNumeros(formularioRegistro.get('peso'))">
+                        <small *ngIf="formularioRegistro.get('peso')?.touched && !formularioRegistro.get('peso')?.valid"> 
+                            Debe Ser Un Peso Entre 1kg y 500kg
+                        </small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="temperatura">Temperatura</label>
+                        <input type="text" id="temperatura" placeholder="Ingrese temperatura" formControlName="temperatura" (input)="formatearNumeros(formularioRegistro.get('temperatura'))">
+                        <small *ngIf="formularioRegistro.get('temperatura')?.touched && !formularioRegistro.get('temperatura')?.valid"> 
+                            Debe Ser Una Temperatura Entre 32°C y 50°C
+                        </small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="presionMin">Presion Minima</label>
+                        <input type="text" id="presionMin" placeholder="Ingrese presion minima" formControlName="presionMin" (input)="formatearNumeros(formularioRegistro.get('presionMin'))">
+                        <small *ngIf="formularioRegistro.get('presionMin')?.touched && !formularioRegistro.get('presionMin')?.valid"> 
+                            Minima debe ser entre 5 y 25 y menor a Maxima
+                        </small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="presionMax">Presion Maxima</label>
+                        <input type="text" id="presionMax" placeholder="Ingrese presion maxima" formControlName="presionMax" (input)="formatearNumeros(formularioRegistro.get('presionMax'))">
+                        <small *ngIf="formularioRegistro.get('presionMax')?.touched && !formularioRegistro.get('presionMax')?.valid"> 
+                            Minima debe ser entre 5 y 25 y mayor a Minima
+                        </small>
+                    </div>
+                    <div class="form-group" >
+                        <label for="presionMax">Informacion Adicional</label>
+                        <div class="fila">
+                            <input type="text" id="clave1" placeholder="Ingrese tipo" formControlName="clave1">
+                            <input type="text" id="valor1" placeholder="Ingrese valor" formControlName="valor1">
+                        </div>
+                        <div class="fila">
+                            <input type="text" id="clave2" placeholder="Ingrese tipo" formControlName="clave2">                            
+                            <input type="text" id="valor2" placeholder="Ingrese valor" formControlName="valor2">                        
+                        </div>
+                        <div class="fila">
+                            <input type="text" id="clave3" placeholder="Ingrese tipo" formControlName="clave3">                            
+                            <input type="text" id="valor3" placeholder="Ingrese valor" formControlName="valor3">
+                        </div>
+                    </div>
+                </div>
+</form>
+<div class="button-group">
+    <button class="register-button" [disabled]="!formularioRegistro.valid" (click)="generarHistoriaClinica()">Generar Historia Clinica</button>
+</div>
+<app-spinner *ngIf="generando" [mensaje]="'Registrando Datos'"></app-spinner>
+<div *ngIf="respuesta" class="pantalla-completa">
+    <div class="mensaje">
+        <p>{{respuesta}}</p>
+        <button (click)="finalizarRegistro()">Ok</button>
+    </div>
+</div>

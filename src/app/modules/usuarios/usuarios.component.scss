@@ -41,3 +41,20 @@ button{
 button:hover{
     background-color: #2f75aa;
 }
+
+.top-boton{
+    position: absolute;
+    left: 1%;
+    width: 150px;
+}
+
+p, h2{
+    text-transform: capitalize;
+}
+
+.historia{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

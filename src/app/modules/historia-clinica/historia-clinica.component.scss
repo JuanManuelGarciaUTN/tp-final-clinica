@@ -1,0 +1,18 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.historia{
+    background-color: whitesmoke;
+    border: 2px solid grey;
+    border-radius: 15px;
+    margin: 10px 0px;
+    padding: 5px 10px 0px;
+}
+
+p, h2{
+    text-transform: capitalize;
+}

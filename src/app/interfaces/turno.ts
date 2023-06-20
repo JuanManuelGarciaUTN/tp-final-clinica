@@ -12,7 +12,8 @@ export interface Turno {
     resenia?: string,
     encuesta?: string,
     calificacion?: string,
-    mensajeCancelacion?: string
+    mensajeCancelacion?: string,
+    historiaClinica?: HistoriaClinica
 }
 
 export enum Estado{
@@ -23,4 +24,20 @@ export enum Estado{
     canceladoAdmin,
     rechazado,
     realizado
+}
+
+export interface HistoriaClinica{
+    altura: number,
+    peso: number,
+    temperatura: number,
+    presionMin: string,
+    presionMax: string,
+    dato1?: DatoVariable,
+    dato2?: DatoVariable,
+    dato3?: DatoVariable,
+}
+
+export interface DatoVariable{
+    clave: string,
+    valor: string
 }

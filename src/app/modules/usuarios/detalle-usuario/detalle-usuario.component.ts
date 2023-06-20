@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -14,6 +14,8 @@ export class DetalleUsuarioComponent {
   public cargando: boolean = false;
   public mensajeEstadoEspecialista = "";
 
+  @Output() mostrarHistoria = new EventEmitter<Usuario>();
+
   constructor(private db: BaseDeDatosService, private permisos: UsuarioService) {}
 
   @Input() set usuario(value: Usuario | undefined){
@@ -21,6 +23,9 @@ export class DetalleUsuarioComponent {
     this.mensajeEstadoEspecialista = value?.habilitado ? "Deshabilitar" : "Habilitar";
   }
 
+  get id(){
+    return this._usuario?.id;
+  }
   get esAdmin(){
     return this.permisos.datos?.tipo == "admin";
   }
@@ -87,5 +92,9 @@ export class DetalleUsuarioComponent {
       .catch(error=>console.log(error));
       this._usuario.habilitado = !this._usuario.habilitado;
     }
+  }
+
+  mostrarHistoriaClinica(){
+    this.mostrarHistoria.emit(this._usuario);
   }
 }

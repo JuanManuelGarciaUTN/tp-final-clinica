@@ -1,0 +1,119 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+
+    padding: 20px;
+    border-radius: 15px;
+    border: solid 2px grey;
+}
+
+.datos{
+    display: flex;
+    max-width: 1200px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pantalla-completa{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0%;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #3485c3, $alpha: 0.2);
+  }
+  
+  .mensaje{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    background-color: whitesmoke;
+    border-radius: 25px;
+    border: 1px solid black;
+  }
+  
+  .mensaje p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .mensaje button {
+    width: 60%;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #3485c3;
+    color: #fff;
+  }
+  
+  .mensaje button:hover{
+    background-color: #2f75aa;
+  }
+
+
+  .form-group {
+    margin: 10px 10px;
+    width: 90%;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    padding: 10px 15px 15px;
+  }
+
+  .fila{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .fila input{
+    width: 45%;
+    display: inline-block;
+  }
+
+  label{
+    display: block;
+  }
+
+  .button-group{
+    width: 212px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .register-button {
+    background-color: #3485c3;
+    color: #fff;
+  }
+
+  .register-button:hover{
+    background-color: #2f75aa;
+  }
+
+  .register-button:disabled{
+    background-color: rgba($color: #3485c3, $alpha: 0.7);
+    cursor: not-allowed;
+  }
+
+  button {
+    width: 100%;
+    margin: 2px 0px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  input{
+    display: block;
+    width: 90%;
+  }

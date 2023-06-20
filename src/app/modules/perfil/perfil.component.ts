@@ -19,4 +19,8 @@ export class PerfilComponent {
   enviarAGestionarHorarios(){
     this.router.navigate(["gestionar-horarios"]);
   }
+
+  enviarAHistoriaClinica(){
+    this.router.navigate(["historia-clinica"]);
+  }
 }
