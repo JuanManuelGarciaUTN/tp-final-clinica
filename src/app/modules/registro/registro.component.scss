@@ -222,3 +222,27 @@ small{
 .carta-animacion-dorso button p{
   margin: 0px;
 }
+
+:host, .carta-animacion-contenedor{
+  opacity: 0;
+  transform: scale(0.1);
+  animation: fadeInAnimation 0.5s ease forwards, sizeChangeAnimation 2s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes sizeChangeAnimation {
+  0% {
+    transform: scale(0.1);
+  }
+  100%   {
+    transform: scale(1);
+  }
+}

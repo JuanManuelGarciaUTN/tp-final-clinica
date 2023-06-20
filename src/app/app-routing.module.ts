@@ -18,37 +18,42 @@ import { HistoriaClinicaComponent } from './modules/historia-clinica/historia-cl
 import { EspecialistaComponent } from './modules/historia-clinica/especialista/especialista.component';
 
 const routes: Routes = [
-  { path: "", component:BienvenidaComponent, canActivate: [NoLogueadoGuard]},
-  { path: "home", component:BienvenidaComponent, canActivate: [NoLogueadoGuard]},
+  { 
+    path: "", component:BienvenidaComponent, 
+    canActivate: [NoLogueadoGuard],
+  },
+  { path: "home", component:BienvenidaComponent, 
+    canActivate: [NoLogueadoGuard],
+  },
   { 
     path: "registro", 
     component: RegistroComponent,
     loadChildren: () => import('./modules/registro/registro.module').then(m => m.RegistroModule),
-    canActivate: [AdminNologueadoGuard]
+    canActivate: [AdminNologueadoGuard],
   },
   { 
     path: "login", 
     component: LoginComponent,
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
-    canActivate: [NoLogueadoGuard]
+    canActivate: [NoLogueadoGuard],
   },
   { 
     path: "perfil", 
     component: PerfilComponent,
     loadChildren: () => import('./modules/perfil/perfil.module').then(m => m.PerfilModule),
-    canActivate: [LogueadoGuard]
+    canActivate: [LogueadoGuard],
   },
   { 
     path: "detalles-usuarios", 
     component: UsuariosComponent,
     loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule),
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard],
   },
   { 
     path: "gestionar-horarios", 
     component: GestionarHorariosComponent,
     loadChildren: () => import('./modules/gestionar-horarios/gestionar-horarios.module').then(m => m.GestionarHorariosModule),
-    canActivate: [EspecialistaGuard]
+    canActivate: [EspecialistaGuard],
   },
   { 
     path: "solicitar-turno", 
@@ -66,7 +71,7 @@ const routes: Routes = [
     path: "historial-turnos", 
     component: HistorialTurnosComponent,
     loadChildren: () => import('./modules/historial-turnos/historial-turnos.module').then(m => m.HistorialTurnosModule),
-    //canActivate: [EspecialistaGuard]
+    //canActivate: [EspecialistaGuard],
   },
   { 
     path: "historia-clinica", 

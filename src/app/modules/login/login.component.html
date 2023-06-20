@@ -1,55 +1,56 @@
-<form class="login-form" [formGroup]="formularioLogin" >
-    <h3>Login</h3>
-    <div class="form-group">
-        <label for="nombre">Usuario</label>
-        <input type="text" id="email" placeholder="Ingrese usuario" formControlName="email">
-        <small class="error" *ngIf="formularioLogin.get('email')?.touched && !formularioLogin.get('email')?.valid"> 
-            Debe Ingresar Un Usuario
-        </small>
+
+    <form class="login-form" [formGroup]="formularioLogin" >
+        <h3>Login</h3>
+        <div class="form-group">
+            <label for="nombre">Usuario</label>
+            <input type="text" id="email" placeholder="Ingrese usuario" formControlName="email">
+            <small class="error" *ngIf="formularioLogin.get('email')?.touched && !formularioLogin.get('email')?.valid"> 
+                Debe Ingresar Un Usuario
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" placeholder="Ingrese contraseña" formControlName="password">
+            <small class="error" *ngIf="formularioLogin.get('password')?.touched && !formularioLogin.get('password')?.valid"> 
+                Al Menos 16 Caracteres
+            </small>
+        </div>
+        <div class="button-group">
+            <button class="login-button" [disabled]="!formularioLogin.valid" (click)="logear()">Login</button>
+            <button class="register-button" (click)="registro()">Registrarse</button>
+        </div>
+        <strong class="error" *ngIf="error != ''">
+            {{error}}
+        </strong>
+    </form>
+    <div appClickAfuera (cliclAfueraEvent)="mostrarBotones()" [condicionExtra]="mostrandoBotones" class="button-container" [ngClass]="{'active': mostrandoBotones}">
+        <button class="main-button" (click)="mostrarBotones()">Acceso Rapido</button>
+        <div class="hidden-buttons">
+            <button class="sub-button"  (click)="completarAdmin()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones" >
+                <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fsuitcase-icon-1582012213.png?alt=media&token=4d9ab4f3-2e2d-4a3b-bff1-1fcee14d61c6">
+                <p>Admin</p>
+            </button>
+            <button class="sub-button"  (click)="completarEspecialista1()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
+                <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fphysician_head_doctor_md_woman-1024-1460695406.png?alt=media&token=90323de2-1cab-4788-93cc-f162d6cac634" >
+                <p>Especialista 1</p>
+            </button>
+            <button class="sub-button"  (click)="completarEspecialista2()"[ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
+                <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fw93cq6c6ZMUit4VhBKw7qRulk0F2-1?alt=media&token=85c69bc6-13b7-45d6-830f-ce3d621c5c15">
+                <p>Especialista 2</p>
+            </button>
+            <button class="sub-button"  (click)="completarPaciente1()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
+                <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fsearch_contact_mail-512-4038244300.png?alt=media&token=020a63fb-b42c-485d-b9a3-0106aa362d04" >
+                <p>Paciente 1</p>
+            </button>
+            <button class="sub-button"  (click)="completarPaciente2()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
+                <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2FJwyC1L1225Qjbx6Q06uUVVcWtxH2-1?alt=media&token=67d4eafb-7644-4612-83dd-64fcda3946b7" >
+                <p>Paciente 2</p>
+            </button>
+            <button class="sub-button"  (click)="completarPaciente3()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
+                <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fifr8HOohpqZauv1wRBGdMUT1Zzw1-1?alt=media&token=8ededeb4-5b3a-4541-b4bc-a740537b58e9" >
+                <p>Paciente 3</p>
+            </button>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="Ingrese contraseña" formControlName="password">
-        <small class="error" *ngIf="formularioLogin.get('password')?.touched && !formularioLogin.get('password')?.valid"> 
-            Al Menos 16 Caracteres
-        </small>
-    </div>
-    <div class="button-group">
-        <button class="login-button" [disabled]="!formularioLogin.valid" (click)="logear()">Login</button>
-        <button class="register-button" (click)="registro()">Registrarse</button>
-    </div>
-    <strong class="error" *ngIf="error != ''">
-        {{error}}
-    </strong>
-</form>
-<div appClickAfuera (cliclAfueraEvent)="mostrarBotones()" [condicionExtra]="mostrandoBotones" class="button-container" [ngClass]="{'active': mostrandoBotones}">
-    <button class="main-button" (click)="mostrarBotones()">Acceso Rapido</button>
-    <div class="hidden-buttons">
-        <button class="sub-button"  (click)="completarAdmin()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones" >
-            <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fsuitcase-icon-1582012213.png?alt=media&token=4d9ab4f3-2e2d-4a3b-bff1-1fcee14d61c6">
-            <p>Admin</p>
-        </button>
-        <button class="sub-button"  (click)="completarEspecialista1()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
-            <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fphysician_head_doctor_md_woman-1024-1460695406.png?alt=media&token=90323de2-1cab-4788-93cc-f162d6cac634" >
-            <p>Especialista 1</p>
-        </button>
-        <button class="sub-button"  (click)="completarEspecialista2()"[ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
-            <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fw93cq6c6ZMUit4VhBKw7qRulk0F2-1?alt=media&token=85c69bc6-13b7-45d6-830f-ce3d621c5c15">
-            <p>Especialista 2</p>
-        </button>
-        <button class="sub-button"  (click)="completarPaciente1()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
-            <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fsearch_contact_mail-512-4038244300.png?alt=media&token=020a63fb-b42c-485d-b9a3-0106aa362d04" >
-            <p>Paciente 1</p>
-        </button>
-        <button class="sub-button"  (click)="completarPaciente2()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
-            <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2FJwyC1L1225Qjbx6Q06uUVVcWtxH2-1?alt=media&token=67d4eafb-7644-4612-83dd-64fcda3946b7" >
-            <p>Paciente 2</p>
-        </button>
-        <button class="sub-button"  (click)="completarPaciente3()" [ngClass]="{visible: mostrandoBotones}" [disabled]="!mostrandoBotones">
-            <img src="https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/imagenes%2Fifr8HOohpqZauv1wRBGdMUT1Zzw1-1?alt=media&token=8ededeb4-5b3a-4541-b4bc-a740537b58e9" >
-            <p>Paciente 3</p>
-        </button>
-    </div>
-</div>
-  
-<app-spinner *ngIf="validando" [mensaje]="'Validando'"></app-spinner>
+      
+    <app-spinner *ngIf="validando" [mensaje]="'Validando'"></app-spinner>
