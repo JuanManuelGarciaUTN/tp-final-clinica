@@ -143,15 +143,13 @@ p{
   }
 
   :host, :host*{
-    opacity: 0;
-    transform: translateY(200%);
     animation: slideInAnimation 1.0s ease forwards;
   }
   
   @keyframes slideInAnimation {
     0% {
       opacity: 0;
-      transform: translateY(100%);
+      transform: translateY(200%);
     }
     100% {
       opacity: 1;

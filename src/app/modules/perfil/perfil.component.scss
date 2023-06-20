@@ -32,8 +32,6 @@ p{
 }
 
 :host, :host *{
-    opacity: 0;
-    transform: translateX(-100%);
     animation: slideInAnimation 1s ease forwards;
   }
   
