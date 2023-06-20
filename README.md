@@ -6,6 +6,21 @@
 
 ## Clinica On-Line
 ### La Clinica On-Line permite facilitar la generación, gestion y visualizado de turnos medicos con nuestros especialistas en diversas areas de medicina.
+### Secciones Publicas:
+
+
+### Bienvenido
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fhome.png?alt=media&token=00b48def-1413-4e2b-8196-16c378e32f5c)
+###### Permite acceder a una cuenta o generar una nueva
+
+### Login
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Flogin.png?alt=media&token=fa488532-449b-4c86-a9f7-6eefb9519ca1)
+###### Permite acceder a una cuenta con email y contraseña
+
+### Registrarse
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fregistro.png?alt=media&token=3d20a100-a8e1-45ee-aeac-544e79636eb4)
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fregistro-paciente.png?alt=media&token=dd9a1416-bd67-4980-b0f0-8076615c4608)
+###### Permite generar un nuevo usuario de tipo paciente o especialista
 
 ### Como Paciente
 Nuestros pacientes podran: 
@@ -21,8 +36,11 @@ Nuestros pacientes podran:
 
 #### Seciones Disponibles:
 ###### Mi Perfil: información del Paciente
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fperfil.png?alt=media&token=3bea05a1-9195-4f03-a807-0d2028adb827)
 ###### Mis Turnos: turnos futuros y pasados del Paciente. Permite visualizar, cancelar y dejar una reseña de la atencion
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fturnos.png?alt=media&token=50760d1b-51e0-4c40-bb75-4245786a213c)
 ###### Sacar Turno: permite sacar un turno segun especialidad, especialista y disponibilidad
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fsacar-turno.png?alt=media&token=157fb704-1f82-47cb-b7d8-40263a2dc951)
 
 ### Como Especialista Medico
 Nuestro especialistas podran:
@@ -40,7 +58,8 @@ Nuestro especialistas podran:
 #### Secciones Disponibles:
 ###### Mi Perfil: información del Especialista
 ###### Mis Turnos: visualizar turnos del Especialista. Permite visualizar, cancelar, rechazar, aceptar y dejar un comentario de la consulta para el paciente
-###### Mis Horarios: permite modificar los dias y horarios disponibles para cada especialidad propia. 
+###### Mis Horarios: permite modificar los dias y horarios disponibles para cada especialidad propia.
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fhorarios.png?alt=media&token=29e53f2f-679f-4c3d-83b5-4786f3cbd82a)
 
 ### Como Administrador
 Nuestros administradores podran:
@@ -57,10 +76,7 @@ Nuestros administradores podran:
 #### Secciones Disponibles:
 ###### Mi Perfil: información del Administrador
 ###### Usuarios: permite visualizar todos los Usuarios y administrar el acceso de los Especialistas
+![alt text](https://firebasestorage.googleapis.com/v0/b/clinica-tp-final.appspot.com/o/github%2Fusuarios.png?alt=media&token=241253c4-5518-42e3-9806-3cf9f339c874)
 ###### Turnos: permite visualizar todos los turnos pasados y futuros, cancelar turnos y ver su informacion.
 ###### Sacar Turno: permite sacar un turno a un Paciente segun especialidad, especialista y disponibilidad
 ###### Registro: permite generar un nuevo usuario de tipo paciente, especialista o admin.
-
-### Secciones Publicas:
-###### Registro: permite generar un nuevo usuario de tipo paciente o especialista
-###### Login: permite acceder a una cuenta con email y contraseña
