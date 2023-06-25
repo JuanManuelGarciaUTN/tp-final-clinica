@@ -9,7 +9,7 @@
 </div>
 <div *ngIf="dni">
     <label>DNI</label>
-    <p>{{dni}}</p>
+    <p>{{dni | dniFormato}}</p>
 </div>
 <div *ngIf="tipo">
     <label>Tipo</label>
@@ -55,6 +55,12 @@
     (click)="mostrarHistoriaClinica()" 
     [disabled]="cargando">
     Mostrar Historia Clinica
+</button>
+<button *ngIf="esAdmin && tipo == 'paciente'" 
+    class="activo" 
+    (click)="descargarDatosTurnos()" 
+    [disabled]="cargando">
+    Descargar Datos Turnos
 </button>
 
 

@@ -1,0 +1,17 @@
+<h3>Log de Ingresos</h3>
+<div>
+    <div class="datos">
+        <p class="tipo">ID</p>
+        <p class="dni">DNI</p>
+        <p class="nombre">Nombre</p>
+        <p class="fecha">Fecha</p>
+    </div>
+    <div class="datos">
+        <div *ngFor="let item of logs | async">
+            <p class="tipo">{{item.idUsuario}}</p>
+            <p class="dni">{{item.dni}}</p>
+            <p class="nombre">{{item.nombre}}</p>
+            <p class="fecha">{{item.fecha | date: 'd/MM HH:mm' : "-0300"}}</p>
+        </div>
+    </div>
+</div>

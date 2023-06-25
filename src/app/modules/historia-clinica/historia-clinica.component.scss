@@ -15,6 +15,37 @@
     padding: 5px 10px 0px;
 }
 
-p, h2{
+.titulo{
+    align-items: center;
+    justify-content: center;
+}
+
+p, h2, h5{
     text-transform: capitalize;
+}
+
+h2, h5{
+    text-align: center;
+}
+
+.activo {
+    background-color: #3485c3;
+    color: #fff;
+}
+
+button {
+    margin: 5px;
+    width: 150px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.descargar{
+    width: auto;
+    padding: 10px 15px;
+    background-color: #85c334;
 }

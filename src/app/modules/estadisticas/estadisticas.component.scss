@@ -1,0 +1,33 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+button {
+    width: 100%;
+    margin: 2px 0px;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .activo {
+    background-color: #3485c3;
+    color: #fff;
+  }
+
+  .opcion{
+    margin: 5px;
+    width: 300px;
+  }
+
+  .opciones-usuario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+

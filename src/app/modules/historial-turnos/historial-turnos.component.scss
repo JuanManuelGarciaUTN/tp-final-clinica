@@ -95,10 +95,9 @@ p{
 }
 
 .botones-estado button{
-    width: 120px;
+    min-width: 120px;
     font-size: 0.65vw;
     font-weight: 700;
-    width: 125px;
 }
 .mensaje{
     display: flex;

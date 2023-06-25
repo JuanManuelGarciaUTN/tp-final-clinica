@@ -8,6 +8,15 @@
             >
             <p>{{item.nombre}}</p>
             <p>{{item.dni}}</p>
+            <p>Turnos Previos:</p>
+            <p class="soft">{{item.fecha1 | date : 'd/M HH:mm' : "-0300"}}</p>
+            <p class="soft">{{item.tipo1}}</p>
+            <p *ngIf="item.fecha2">---------------</p>
+            <p class="soft">{{item.fecha2 | date : 'd/M HH:mm' : "-0300"}}</p>
+            <p class="soft">{{item.tipo2}}</p>
+            <p *ngIf="item.fecha3">---------------</p>
+            <p class="soft">{{item.fecha3 | date : 'd/M HH:mm' : "-0300"}}</p>
+            <p class="soft">{{item.tipo3}}</p>
         </button>
     </div>
 </div>

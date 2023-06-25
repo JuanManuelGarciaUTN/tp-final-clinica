@@ -11,6 +11,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <li class="nav-item" *ngIf="tipoUsuario == 'admin'">
+                    <a class="nav-link active" routerLink="/estadisticas">Estadisticas</a>
+                </li>
+                <li class="nav-item" *ngIf="tipoUsuario == 'admin'">
                     <a class="nav-link active" routerLink="/detalles-usuarios">Usuarios</a>
                 </li>
                 <li class="nav-item" *ngIf="tipoUsuario == 'especialista' || tipoUsuario == 'paciente'">

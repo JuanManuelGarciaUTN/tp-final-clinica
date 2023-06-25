@@ -1,0 +1,38 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tipo{
+    width: 15%;
+    padding-left: 5px;
+}
+
+.nombre{
+    width: 35%;
+    padding-left: 5px;
+}
+
+.fecha{
+    width: 15%;
+    padding-left: 5px;
+}
+
+.dni{
+    width: 15%;
+    padding-left: 5px;
+}
+
+p{
+    display: inline-block;
+    margin-bottom: 0px;
+    text-transform: capitalize;
+}
+
+.datos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+}

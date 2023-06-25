@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HistoriaClinicaComponent } from './historia-clinica.component';
 import { EspecialistaComponent } from './especialista/especialista.component';
 
-
-
 @NgModule({
   declarations: [
     HistoriaClinicaComponent,
@@ -15,6 +13,7 @@ import { EspecialistaComponent } from './especialista/especialista.component';
   ],
   exports: [
     HistoriaClinicaComponent,
-  ]
+  ],
+  providers: [ ],
 })
 export class HistoriaClinicaModule { }

@@ -6,6 +6,7 @@ import { PipesModule } from "src/app/pipes/pipes.module";
 import { ReactiveFormsModule } from '@angular/forms';
 import { GenerarHistoriaClinicaComponent } from './generar-historia-clinica/generar-historia-clinica.component';
 import { SpinnerModule } from '../spinner/spinner.module';
+import { DirectivasModule } from '../directivas/directivas.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { SpinnerModule } from '../spinner/spinner.module';
         SpinnerModule,
         ReactiveFormsModule,
         FormsModule,
-        PipesModule
+        PipesModule,
+        DirectivasModule
     ]
 })
 export class HistorialTurnosModule { }

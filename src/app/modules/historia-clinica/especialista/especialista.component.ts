@@ -22,9 +22,26 @@ export class EspecialistaComponent {
     if(this.usuario.datos && this.usuario.datos.tipo == "especialista"){
       this.subTurnos = this.db.obtenerTurnosEspecialista(this.usuario.datos.id).subscribe(turnos=>{
         this.pacientes = [];
+        turnos.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
         for(let item of turnos){
-          if(item.estado == Estado.realizado && !this.existePaciente(this.pacientes, item.idPaciente)){
-            this.pacientes.push({id: item.idPaciente, nombre: item.nombrePaciente, dni: item.dniPaciente});
+          if(item.estado == Estado.realizado)
+          {
+            if(!this.existePaciente(this.pacientes, item.idPaciente)){
+              this.pacientes.push({id: item.idPaciente, nombre: item.nombrePaciente, dni: item.dniPaciente, fecha1: item.fecha, tipo1: item.tipo});
+            }
+            else{
+              const indice = this.pacientes.findIndex((paciente) => paciente.id === item.idPaciente);
+              if (indice !== -1) {
+                if(!this.pacientes[indice].fecha2){
+                  this.pacientes[indice].fecha2 = item.fecha;
+                  this.pacientes[indice].tipo2 = item.tipo;
+                }
+                else if(!this.pacientes[indice].fecha3){
+                  this.pacientes[indice].fecha3 = item.fecha;
+                  this.pacientes[indice].tipo3 = item.tipo;
+                }
+              }
+            }
           }
         }
       });

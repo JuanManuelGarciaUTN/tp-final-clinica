@@ -1,0 +1,33 @@
+<h3>Estadisticas Clinica</h3>
+<div class="opciones-usuario">
+    <button class="opcion" 
+    (click)="setLog()"
+    [ngClass]="{activo: estado == TipoEstadistica.log}">
+        Log Ingresos
+    </button>
+    <button class="opcion" 
+    (click)="setEspecialidad()"
+    [ngClass]="{activo: estado == TipoEstadistica.especialidad}">
+        Turnos Por Especialidad
+    </button>
+    <button class="opcion" 
+    (click)="setTurnosPorDia()"
+    [ngClass]="{activo: estado == TipoEstadistica.dia}">
+        Turnos Por Dia
+    </button>
+    <button class="opcion" 
+    (click)="setTurnosSolicitados()"
+    [ngClass]="{activo: estado == TipoEstadistica.turnosSolicitados}">
+        Turnos Socilitados
+    </button>
+    <button class="opcion"
+    (click)="setTurnosFinalizados()"
+    [ngClass]="{activo: estado == TipoEstadistica.turnosFinalizados}">
+        Turnos Finalizados
+    </button>
+</div>
+
+<app-log *ngIf="estado == TipoEstadistica.log"></app-log>
+<app-dia *ngIf="estado == TipoEstadistica.dia"></app-dia>
+<app-especialidad  *ngIf="estado == TipoEstadistica.especialidad"></app-especialidad>
+<app-turnos *ngIf="estado == TipoEstadistica.turnosFinalizados || estado == TipoEstadistica.turnosSolicitados" [finalizados]="estado == TipoEstadistica.turnosFinalizados"></app-turnos>

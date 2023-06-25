@@ -1,4 +1,18 @@
-<h2 *ngIf="datos && datos.tipo == 'paciente'">Historia Clinica de {{datos.nombre + " " + datos.apellido}}</h2>
+<div class="titulo historia" *ngIf="datos && datos.tipo == 'paciente'">
+    <h2>Historia Clinica de {{datos.nombre + " " + datos.apellido}}</h2>
+    <div>
+        <h5>Filtrar Especialidades</h5>
+        <div class="opciones">
+            <button class="opciones-imagen" *ngFor="let item of especialidades" 
+                (click)="seleccionarEspecialidad(item.nombre)" 
+                [ngClass]="{activo: especialidadSeleccionada == item.nombre}"
+                >
+                {{item.nombre}}
+            </button>
+        </div>
+    </div>
+    <button class="descargar" (click)="descargarHistoria()">Descargar Historia Clinica</button>
+</div>
 <div class="historia" *ngFor="let item of turnos">
     <p><strong>Fecha: </strong>{{item.fecha | date : 'd/M HH:mm' : "-0300"}}</p>
     <p><strong>Especialista: </strong>{{item.nombreEspecialista}}</p>

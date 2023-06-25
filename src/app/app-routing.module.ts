@@ -16,6 +16,7 @@ import { AdminComponent } from './modules/solicitar-turno/admin/admin.component'
 import { HistorialTurnosComponent } from './modules/historial-turnos/historial-turnos.component';
 import { HistoriaClinicaComponent } from './modules/historia-clinica/historia-clinica.component';
 import { EspecialistaComponent } from './modules/historia-clinica/especialista/especialista.component';
+import { EstadisticasComponent } from './modules/estadisticas/estadisticas.component';
 
 const routes: Routes = [
   { 
@@ -48,6 +49,12 @@ const routes: Routes = [
     component: UsuariosComponent,
     loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule),
     canActivate: [AdminGuard],
+  },
+  { 
+    path: "estadisticas", 
+    component: EstadisticasComponent,
+    loadChildren: () => import('./modules/estadisticas/estadisticas.module').then(m => m.EstadisticasModule),
+    //canActivate: [AdminGuard],
   },
   { 
     path: "gestionar-horarios", 

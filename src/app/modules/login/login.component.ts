@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, sendEmailVerification} from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 
@@ -19,7 +20,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private usuario: UsuarioService,
-    private auth: Auth) {
+    private auth: Auth,
+    private db: BaseDeDatosService) {
     this.formularioLogin = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.minLength(16), Validators.required])
@@ -45,6 +47,7 @@ export class LoginComponent {
                 this.usuario.cerrarSesion();
               }
               else{
+                this.db.generarLog(this.usuario.datos)
                 this.router.navigate(["/perfil"]);
               }
             })  
