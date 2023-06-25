@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SolicitarTurnoComponent } from './solicitar-turno.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 @NgModule({
@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
     AdminComponent
   ],
   imports: [
+    PipesModule,
     CommonModule
   ]
 })

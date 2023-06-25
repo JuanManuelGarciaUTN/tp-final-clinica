@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DniFormatoPipe } from './dni-formato.pipe';
 import { EstadoTurnoPipe } from './estado-turno.pipe';
+import { NombreCompletoPipe } from './nombre-completo.pipe';
 
 @NgModule({
   declarations: [
     DniFormatoPipe,
-    EstadoTurnoPipe
+    EstadoTurnoPipe,
+    NombreCompletoPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
     DniFormatoPipe,
-    EstadoTurnoPipe
+    EstadoTurnoPipe,
+    NombreCompletoPipe
   ]
 })
 export class PipesModule { }

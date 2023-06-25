@@ -1,3 +1,4 @@
+<span>
 <h3>Historial Turnos</h3>
 <div class="titulo">
     <h4>Filtrar Datos</h4>
@@ -18,7 +19,7 @@
         </div>
         <div class="datos" *ngFor="let turno of turnos">
             <p *ngIf="tipoUser != 'paciente'">{{turno.nombrePaciente}}</p>
-            <p *ngIf="tipoUser != 'paciente'">{{turno.dniPaciente}}</p>
+            <p *ngIf="tipoUser != 'paciente'">{{turno.dniPaciente | dniFormato}}</p>
             <p *ngIf="tipoUser != 'especialista'">{{turno.nombreEspecialista}}</p>
             <p>{{turno.tipo}}</p>
             <p>{{turno.fecha | date: 'd/MM HH:mm' : "-0300"}}</p>
@@ -30,11 +31,13 @@
                 <button class="cambiar-estado" *ngIf="turno.estado == estados.pendiente && tipoUser == 'especialista'" (click)="rechazarTurno(turno)">Rechazar</button>
                 <button class="cambiar-estado" *ngIf="turno.estado == estados.pendiente && tipoUser == 'especialista'" (click)="aceptarTurno(turno)">Aceptar</button>
                 <button class="cambiar-estado" *ngIf="turno.estado == estados.aceptado && tipoUser == 'especialista'" (click)="finalizarTurno(turno)">Finalizar</button>
-                <button class="cambiar-estado" *ngIf="turno.resenia && tipoUser != 'admin'" (click)="verResenia(turno)">Ver Reseña</button>
-                <button class="cambiar-estado" *ngIf="turno.calificacion&& tipoUser != 'admin'" (click)="verCalificacion(turno)">Ver Encuesta</button>
-                <button class="cambiar-estado" *ngIf="turno.encuesta && tipoUser != 'admin'" (click)="verEncuesta(turno)">Ver Calificacion</button>
+                <button class="cambiar-estado" *ngIf="turno.resenia && tipoUser != 'admin'" (click)="verResenia(turno)">Reseña</button>
+                <button class="cambiar-estado" *ngIf="turno.calificacion&& tipoUser != 'admin'" (click)="verCalificacion(turno)">Encuesta</button>
+                <button class="cambiar-estado" *ngIf="turno.encuesta && tipoUser != 'admin'" (click)="verEncuesta(turno)">Calificacion</button>
+                <button class="cambiar-estado" *ngIf="turno.estado == estados.realizado" (click)="verHistoria(turno)">Historia</button>
                 <button class="cambiar-estado" *ngIf="turno.estado == estados.realizado && tipoUser == 'paciente' && !turno.calificacion" (click)="calificarAtencion(turno)">Calificar Atencion</button>
                 <button class="cambiar-estado" *ngIf="turno.estado == estados.realizado && tipoUser == 'paciente' && !turno.encuesta" (click)="completarEncuesta(turno)">Completar Encuesta</button>
+                <button class="cambiar-estado" *ngIf="turno.estado > 1 && turno.estado < 5 || turno.estado == estados.rechazado" (click)="verCancelacion(turno)">Ver Motivo</button>
                 <p class="cancelado" *ngIf="turno.estado > 1 && turno.estado < 5">
                     Turno Cancelado Por
                     {{turno.estado == estados.canceladoPaciente ? "Paciente" : turno.estado == estados.canceladoEspecialista ? "Especialita" : "Administracion"}}
@@ -46,6 +49,7 @@
         </div>
     </div>
 </div>
+</span>
 <div *ngIf="mensaje" class="pantalla-completa">
     <div class="mensaje" *ngIf="tipoMensaje || encuesta != undefined">
         <p>{{mensaje}}</p>
@@ -60,4 +64,22 @@
 </div>
 <div *ngIf="generandoHistoriaClinica" class="pantalla-completa">
     <app-generar-historia-clinica *ngIf="generandoHistoriaClinica" [turno]="turnoSeleccionado" (finalizado)="agregarHistoriaClinica($event)"></app-generar-historia-clinica>
+</div>
+<div *ngIf="historiaClinica" class="pantalla-completa">
+    <div class="historia">
+        <p><strong>Altura: </strong>{{historiaClinica.altura}}</p>
+        <p><strong>Peso: </strong>{{historiaClinica.peso}}</p>
+        <p><strong>Temperatura: </strong>{{historiaClinica.temperatura}}°C</p>
+        <p><strong>Presión: </strong>{{historiaClinica.presionMax}} / {{historiaClinica.presionMin}}</p>
+        <p *ngIf="historiaClinica.dato1?.clave != '' && historiaClinica.dato1?.valor != ''">
+            <strong>{{historiaClinica.dato1?.clave}}: </strong>{{historiaClinica.dato1?.valor}}
+        </p>
+        <p *ngIf="historiaClinica.dato2?.clave != '' && historiaClinica.dato2?.valor != ''">
+            <strong>{{historiaClinica.dato2?.clave}}: </strong>{{historiaClinica.dato2?.valor}}
+        </p>
+        <p *ngIf="historiaClinica.dato3?.clave != '' && historiaClinica.dato3?.valor != ''">
+            <strong>{{historiaClinica.dato3?.clave}}: </strong>{{historiaClinica.dato3?.valor}}
+        </p>
+        <button (click)="cancelarMensaje()">Ok</button>
+    </div>
 </div>

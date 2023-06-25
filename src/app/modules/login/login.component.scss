@@ -40,6 +40,15 @@
     font-weight: bold;
     cursor: pointer;
   }
+
+  .password{
+    display: flex;
+    align-items: center;
+  }
+
+  .password input{
+    width: 195px;
+  }
   
   
   .login-button {

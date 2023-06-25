@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Estado, Turno } from 'src/app/interfaces/turno';
+import { Estado, HistoriaClinica, Turno } from 'src/app/interfaces/turno';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -31,6 +31,7 @@ export class HistorialTurnosComponent {
   public turnoSeleccionado?: Turno;
   public encuesta?: boolean;
   public generandoHistoriaClinica = false;
+  public historiaClinica?: HistoriaClinica;
 
   constructor(private usuario: UsuarioService,private db: BaseDeDatosService){
     if(this.usuario.datos?.tipo == "admin"){
@@ -251,6 +252,7 @@ export class HistorialTurnosComponent {
   cancelarMensaje(){
     this.mensaje = "";
     this.tipoMensaje = undefined;
+    this.historiaClinica = undefined;
   }
 
   finalizarMensaje(){
@@ -259,6 +261,9 @@ export class HistorialTurnosComponent {
         this.db.actualizarEstadoTurno(this.turnoSeleccionado, this.tipoMensaje);
         if(this.tipoMensaje == Estado.realizado){
           this.db.agregarMensajeReseniaTurno(this.turnoSeleccionado, this.respuestaUsuario);
+        }
+        else if(this.tipoMensaje == Estado.canceladoAdmin || this.tipoMensaje == Estado.canceladoPaciente || this.tipoMensaje == Estado.canceladoEspecialista){
+          this.db.agregarMensajeCancelacionTurno(this.turnoSeleccionado, this.respuestaUsuario);
         }
       }
       else if(this.encuesta){
@@ -284,6 +289,15 @@ export class HistorialTurnosComponent {
 
   verEncuesta(turno: Turno){
     this.mensaje = turno.encuesta ? turno.encuesta : "";
+  }
+
+  verCancelacion(turno: Turno){
+    console.log(turno);
+    this.mensaje = turno.mensajeCancelacion ? turno.mensajeCancelacion : "";
+  }
+
+  verHistoria(turno: Turno){
+    this.historiaClinica = turno.historiaClinica;
   }
 
   calificarAtencion(turno: Turno){

@@ -7,8 +7,8 @@
             (click)="seleccionarPaciente(item)" 
             [ngClass]="{activo: pacienteSeleccionado == item}"
             >
-            <p>{{item.nombre + " " + item.apellido}}</p>
-            <p>{{item.dni}}</p>
+            <p>{{item | nombreCompleto}}</p>
+            <p>{{item.dni | dniFormato}}</p>
         </button>
     </div>
 </div>

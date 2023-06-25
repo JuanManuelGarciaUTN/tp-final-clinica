@@ -6,6 +6,8 @@
 }
 
 .historia{
+    display: flex;
+    flex-direction: column;
     background-color: whitesmoke;
     border: 2px solid grey;
     border-radius: 15px;

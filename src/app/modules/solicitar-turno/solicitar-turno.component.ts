@@ -5,8 +5,6 @@ import { Especialidad } from 'src/app/interfaces/especialidad';
 import { Estado, Turno } from 'src/app/interfaces/turno';
 import { Horario, Usuario } from 'src/app/interfaces/usuario';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
-import { TurnosDisponiblesService } from 'src/app/services/turnos-disponibles.service';
-import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({

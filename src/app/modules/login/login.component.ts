@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, sendEmailVerification} from '@angular/fire/auth';
-import { ClickAfueraDirective } from '../directivas/click-afuera.directive';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';

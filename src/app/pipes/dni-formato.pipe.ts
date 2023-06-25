@@ -4,13 +4,20 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dniFormato'
 })
 export class DniFormatoPipe implements PipeTransform {
-
   transform(value: string): string {
-    const digitos = value.replace(/\D/g, '');
+    if (!value) {
+      return value;
+    }
 
-    const agruparCadaTres = digitos.match(/.{1,3}/g);
+    let dni = value.split('');
+    let resultado = [];
 
-    return agruparCadaTres ? agruparCadaTres.join(' . ') : '';
+    for( let i = 0; i <= dni.length; i++ ) {
+      if(i!= 0 && i%3 == 0){
+        resultado.unshift(" . ");
+      }
+      resultado.unshift(dni[dni.length-1-i]);
+    }
+    return resultado.join('');
   }
-
 }

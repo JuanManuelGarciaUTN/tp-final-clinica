@@ -18,7 +18,7 @@
             (click)="seleccionarEspecialista(item)" 
             [ngClass]="{activo: especialistaSeleccionado?.id === item.id}"
             >
-            <p>{{item.nombre + " " + item.apellido}}</p>
+            <p>{{item | nombreCompleto}}</p>
             <img [src]="item.imagen1">
         </button>
     </div>

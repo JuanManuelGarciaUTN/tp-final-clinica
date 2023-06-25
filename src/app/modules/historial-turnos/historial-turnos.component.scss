@@ -30,7 +30,6 @@ button {
     justify-content: center;
     flex-direction: column;
     max-height: 65vh;
-    overflow-y: auto;
 }
 
 .opciones {
@@ -57,21 +56,30 @@ button {
     width: 85vw;
     justify-content: left;
     align-items: center;
+    font-size: 0.75vw;
 }
 
 .estado{
     background-color: whitesmoke;
     text-align: center;
     font-weight: bold;
-    width: 145px;
-    margin-right: 55px;
+    width: 80px;
+    font-size: 0.65vw;
+    margin-right: 15px;
     padding: 10px 0px;
     border-radius: 5px;
 }
 
+.cambiar-estado{
+  font-size: 0.65vw; 
+  font-weight: 700;
+  width: auto;
+  padding: 5px 10px;
+}
+
 p{
     margin: 0px;
-    width: 200px;
+    width: 180px;
     text-transform: capitalize;
 }
 
@@ -83,11 +91,12 @@ p{
 .botones-estado{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .botones-estado button{
     width: 120px;
-    font-size: 15px;
+    font-size: 0.65vw;
     font-weight: 700;
     width: 125px;
 }
@@ -140,9 +149,10 @@ p{
   .cancelado{
     width: 300px;
     font-weight: bolder;
+
   }
 
-  :host, :host*{
+  :host, :host span{
     animation: slideInAnimation 1.0s ease forwards;
   }
   
@@ -156,3 +166,19 @@ p{
       transform: translateY(0);
     }
   }
+
+  .historia{
+    background-color: whitesmoke;
+    border: 2px solid grey;
+    border-radius: 15px;
+    margin: 10px 0px;
+    padding: 5px 10px 0px;
+}
+
+p, h2{
+    text-transform: capitalize;
+}
+
+span{
+  display: block;
+}
