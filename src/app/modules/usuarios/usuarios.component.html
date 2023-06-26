@@ -9,7 +9,7 @@
 <button *ngIf="mostrandoHistoria" class="top-boton" (click)="volver()">Volver</button>
 <div class="historia">
     <h2  *ngIf="mostrandoHistoria">Historia Clinica de {{usuario?.nombre + " " + usuario?.apellido}}</h2>
-    <app-historia-clinica *ngIf="mostrandoHistoria && usuario" [paciente]="usuario.id"></app-historia-clinica>
+    <app-historia-clinica *ngIf="mostrandoHistoria && usuario" [paciente]="usuario"></app-historia-clinica>
 </div>
 
 

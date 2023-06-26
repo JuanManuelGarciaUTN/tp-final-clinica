@@ -1,1 +1,23 @@
-<p>turnos works!</p>
+<button (click)="generarPdf()" class="descargar" [disabled]="generando">Descargar Datos PDF</button>
+<div class="centrado" id="contenido" #contenido>
+    <h3>Turnos {{finalizados ? "Finalizados" : "Socilitados"}} Por Especialista</h3>
+    <div class="selector">
+        <label for="">Fecha Inicio:</label>
+        <input type="date" [max]="fechaFin | date:'yyyy-MM-dd'" (input)="onCambioInicio($event)">
+        <label for="">Fecha Fin:</label>
+        <input type="date" [min]="fechaInicio | date:'yyyy-MM-dd'" (input)="onCambioFin($event)">
+    </div>
+    <canvas #pieChart id="pieChart"></canvas>
+    <div>
+        <div class="linea">
+            <strong><p class="nombre">Tipo</p></strong>
+            <strong><p class="dni">Cantidad</p></strong>
+        </div>
+        <div class="datos">
+            <div  class="linea" *ngFor="let item of turnos">
+                <p class="nombre">{{item.nombre}}</p>
+                <p class="dni">{{item.contador}}</p>
+            </div>
+        </div>
+    </div>
+</div>

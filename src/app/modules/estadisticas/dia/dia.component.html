@@ -1,1 +1,17 @@
-<p>dia works!</p>
+<button (click)="generarPdf()" class="descargar" [disabled]="generando">Descargar Datos PDF</button>
+    <div class="centrado" id="contenido" #contenido>
+    <h3>Turnos Por Dia</h3>
+    <canvas #pieChart id="pieChart"></canvas>
+    <div>
+        <div class="linea">
+            <strong><p class="nombre">Tipo</p></strong>
+            <strong><p class="dni">Cantidad</p></strong>
+        </div>
+        <div class="datos">
+            <div  class="linea" *ngFor="let item of turnos">
+                <p class="nombre">{{item.nombre}}</p>
+                <p class="dni">{{item.contador}}</p>
+            </div>
+        </div>
+    </div>
+</div>

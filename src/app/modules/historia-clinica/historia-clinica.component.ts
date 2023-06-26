@@ -27,13 +27,14 @@ export class HistoriaClinicaComponent {
   private _especialista?: Usuario;
   public especialidades: Especialidad[] = [];
   public especialidadSeleccionada = "";
+  private _paciente?: Usuario
 
   constructor(private db:BaseDeDatosService,
     private usuario: UsuarioService, 
     private datePipe: DatePipe,
     private http: HttpClient) { 
     if(this.usuario.datos?.tipo == "paciente"){
-      this.paciente = this.usuario.datos.id;
+      this.paciente = this.usuario.datos;
     }
   }
 
@@ -47,9 +48,10 @@ export class HistoriaClinicaComponent {
     }
   }
 
-  @Input() set paciente(value: string | undefined){
+  @Input() set paciente(value: Usuario | undefined){
     if(value){
-      this.sub = this.db.obtenerTurnosPaciente(value).subscribe(turnos => {
+      this._paciente = value;
+      this.sub = this.db.obtenerTurnosPaciente(value.id).subscribe(turnos => {
         this._turnos = [];
         for(let turno of turnos){
           if(turno.estado == Estado.realizado){
@@ -139,7 +141,7 @@ export class HistoriaClinicaComponent {
             const docDefinition: TDocumentDefinitions = {
               content: [
                 { image: base64Image, width: 50, height: 50 },
-                { text: "Historia Clinica " + this.especialidadSeleccionada + ": " + this.datos?.nombre + " " + this.datos?.apellido, style: 'header' },
+                { text: "Historia Clinica " + this.especialidadSeleccionada + ": " + this._paciente?.nombre + " " + this._paciente?.apellido, style: 'header' },
                 { text: "Fecha Emision: " + this.datePipe.transform(new Date(), 'd/M/YYYY HH:mm', '-0300')+" hs", style: 'header' },
                 { text: '------------------------------------', style: 'separator' },
                 ...flattenedCardItems,
@@ -162,7 +164,7 @@ export class HistoriaClinicaComponent {
                 }
               }
             };
-            const fileName = 'historia-clinica-' + (this.especialidadSeleccionada !== "" ? this.especialidadSeleccionada + "-" : "") + this.datos?.nombre + "-" + this.datos?.apellido;
+            const fileName = 'historia-clinica-' + (this.especialidadSeleccionada !== "" ? this.especialidadSeleccionada + "-" : "") + this._paciente?.nombre + "-" + this._paciente?.apellido;
             pdfMake.createPdf(docDefinition).download(fileName);
           })
           .catch((error) => {
@@ -171,10 +173,15 @@ export class HistoriaClinicaComponent {
   }
 
   private filtrarPorEspecialidad(nombre: string){
-    this.turnos = [];
-    for(let turno of this._turnos){
-      if(turno.tipo == nombre){
-        this.turnos.push(turno);
+    if(nombre == ""){
+      this.turnos = this._turnos;
+    }
+    else{
+      this.turnos = [];
+      for(let turno of this._turnos){
+        if(turno.tipo == nombre){
+          this.turnos.push(turno);
+        }
       }
     }
   }

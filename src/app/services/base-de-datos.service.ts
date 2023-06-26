@@ -178,14 +178,16 @@ export class BaseDeDatosService {
         idUsuario: usuario.id,
         nombre: usuario.nombre + " " + usuario.apellido,
         dni: usuario.dni,
-        fecha: new Date(),
+        tipo: usuario.tipo,
+        fecha: new Date().toUTCString()
       });
     }
   }
 
   obtenerLogs(){
-    const coleccion = collection(this.firestore, "turnos");
-    return collectionData(coleccion, {idField: 'id'}) as Observable<Log[]>;
+    const coleccion = collection(this.firestore, "logs");
+    const q = query(coleccion, orderBy("fecha", "desc"));
+    return collectionData(q, {idField: 'id'}) as Observable<Log[]>;
   }
 }
 

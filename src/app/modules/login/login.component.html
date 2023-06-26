@@ -5,7 +5,7 @@
             <label for="nombre">Usuario</label>
             <input type="text" id="email" placeholder="Ingrese usuario" formControlName="email">
             <small class="error" *ngIf="formularioLogin.get('email')?.touched && !formularioLogin.get('email')?.valid"> 
-                Debe Ingresar Un Usuario
+                Debe Ingresar Un Mail Valido
             </small>
         </div>
         <div class="form-group">

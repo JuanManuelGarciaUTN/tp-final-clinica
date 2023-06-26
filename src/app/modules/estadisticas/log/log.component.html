@@ -1,15 +1,18 @@
 <h3>Log de Ingresos</h3>
+<button (click)="descargarExcel()" class="descargar">Descargar Datos Excel</button>
 <div>
-    <div class="datos">
-        <p class="tipo">ID</p>
-        <p class="dni">DNI</p>
-        <p class="nombre">Nombre</p>
-        <p class="fecha">Fecha</p>
+    <div class="linea">
+        <strong><p class="tipo">ID</p></strong>
+        <strong><p class="nombre">Tipo</p></strong>
+        <strong><p class="dni">DNI</p></strong>
+        <strong><p class="nombre">Nombre</p></strong>
+        <strong><p class="fecha">Fecha</p></strong>
     </div>
     <div class="datos">
-        <div *ngFor="let item of logs | async">
+        <div  class="linea" *ngFor="let item of logs | async">
             <p class="tipo">{{item.idUsuario}}</p>
-            <p class="dni">{{item.dni}}</p>
+            <p class="nombre">{{item.tipo}}</p>
+            <p class="dni">{{item.dni | dniFormato}}</p>
             <p class="nombre">{{item.nombre}}</p>
             <p class="fecha">{{item.fecha | date: 'd/MM HH:mm' : "-0300"}}</p>
         </div>

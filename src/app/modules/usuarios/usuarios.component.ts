@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import * as XLSX from 'xlsx';
 
 @Component({

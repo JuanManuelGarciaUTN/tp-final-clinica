@@ -1,26 +1,38 @@
 :host{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+}
+
+.descargar{
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: auto;
+    padding: 10px 15px;
+    background-color: #85c334;
 }
 
 .tipo{
-    width: 15%;
+    width: 25vw;
     padding-left: 5px;
 }
 
 .nombre{
-    width: 35%;
+    width: 15vw;
     padding-left: 5px;
 }
 
 .fecha{
-    width: 15%;
+    width: 15vw;
     padding-left: 5px;
 }
 
 .dni{
-    width: 15%;
+    width: 15vw;
     padding-left: 5px;
 }
 
@@ -35,4 +47,13 @@ p{
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
+}
+
+.linea{
+    display: flex;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding: 2px 5px;
 }
