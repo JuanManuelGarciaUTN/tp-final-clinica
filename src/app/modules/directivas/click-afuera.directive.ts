@@ -6,7 +6,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 export class ClickAfueraDirective {
 
   @Output() cliclAfueraEvent = new EventEmitter();
-  @Input() condicionExtra: boolean = false;
+  @Input() condicionExtra: boolean = true;
 
   constructor(private elementRef: ElementRef) { }
 

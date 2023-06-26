@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class MostrarPasswordDirective {
 
-  private _shown = false;
+  private _visible = false;
 
   constructor(private el: ElementRef) {
     const width = parseInt(this.el.nativeElement.style.width, 10);
@@ -23,18 +23,18 @@ export class MostrarPasswordDirective {
     span.setAttribute("class", "toggle");
 
     span.addEventListener('click', () => {
-      this.toggle(span);
+      this.cambiarEstado(span);
     });
     parent.appendChild(span);
   }
 
-  toggle(span: HTMLElement) {
-    if (this._shown) {
+  cambiarEstado(span: HTMLElement) {
+    if (this._visible) {
       this.ocultar(span);
     } else {
       this.mostrar(span);
     }
-    this._shown = !this._shown;
+    this._visible = !this._visible;
   }
 
   mostrar(span: HTMLElement){

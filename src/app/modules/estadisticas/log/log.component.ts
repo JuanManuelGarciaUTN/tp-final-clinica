@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Log } from 'src/app/interfaces/log';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import * as XLSX from 'xlsx';
@@ -12,21 +12,31 @@ import * as XLSX from 'xlsx';
   providers: [DatePipe]
 })
 export class LogComponent {
-  public logs: Observable<Log[]>;
+  public logs: Log[] = [];
+  private sub?: Subscription;
 
   constructor(private db: BaseDeDatosService, private datePipe: DatePipe) {
-    this.logs = this.db.obtenerLogs();
+    this.sub = this.db.obtenerLogs().subscribe(logs=>{
+      logs.sort((a,b)=>{
+        return (new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+      });
+      this.logs = logs;
+    });
    }
 
    descargarExcel(){
-    let sub = this.logs.subscribe(logs =>{
-      const nombre = "log-accesos"
-      const datosFormateados = this.formatearDatos(logs);
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosFormateados);
-      const workbook: XLSX.WorkBook = { Sheets: { [nombre]: worksheet }, SheetNames: [nombre] };
-      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-      this.generarArchivoExcel(excelBuffer, `${nombre}.xlsx`);
-    })
+    const nombre = "log-accesos"
+    const datosFormateados = this.formatearDatos(this.logs);
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosFormateados);
+    const workbook: XLSX.WorkBook = { Sheets: { [nombre]: worksheet }, SheetNames: [nombre] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.generarArchivoExcel(excelBuffer, `${nombre}.xlsx`);
+  }
+
+  ngDestroy(){
+    if(this.sub){
+      this.sub.unsubscribe();
+    }
   }
 
   private formatearDatos(lista: Log[]) {

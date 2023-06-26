@@ -6,8 +6,7 @@ import { Estado } from '../interfaces/turno';
 })
 export class EstadoTurnoPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    console.log(value);
+  transform(value: unknown, ...args: unknown[]): string {
     switch(value){
       case Estado.pendiente:
         return "pendiente";

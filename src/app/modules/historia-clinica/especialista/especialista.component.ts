@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class EspecialistaComponent {
 
   public pacientes: any[] = [];
-  public pacienteSeleccionado?: any;
+  public pacienteSeleccionado?: Usuario;
   private subPacientes?: Subscription;
   private subTurnos?: Subscription;
 
@@ -61,7 +61,7 @@ export class EspecialistaComponent {
     }
   }
 
-  seleccionarPaciente(item: any){
+  seleccionarPaciente(item: Usuario){
     this.pacienteSeleccionado = item;
   }
 

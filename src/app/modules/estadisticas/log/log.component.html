@@ -9,7 +9,7 @@
         <strong><p class="fecha">Fecha</p></strong>
     </div>
     <div class="datos">
-        <div  class="linea" *ngFor="let item of logs | async">
+        <div  class="linea" *ngFor="let item of logs">
             <p class="tipo">{{item.idUsuario}}</p>
             <p class="nombre">{{item.tipo}}</p>
             <p class="dni">{{item.dni | dniFormato}}</p>

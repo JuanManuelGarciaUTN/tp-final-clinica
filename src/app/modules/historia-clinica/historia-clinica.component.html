@@ -1,5 +1,5 @@
 <div class="titulo historia" *ngIf="datos && datos.tipo != 'especialista'">
-    <h2>Historia Clinica de {{datos.nombre + " " + datos.apellido}}</h2>
+    <h2  *ngIf="datos && datos.tipo == 'paciente'">Historia Clinica de {{datos.nombre + " " + datos.apellido}}</h2>
     <div>
         <h5>Filtrar Especialidades</h5>
         <div class="opciones">

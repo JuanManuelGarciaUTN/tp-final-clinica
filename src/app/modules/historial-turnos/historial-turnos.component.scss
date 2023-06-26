@@ -27,7 +27,6 @@ button {
 .titulo{
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     max-height: 65vh;
 }
@@ -151,7 +150,7 @@ p{
 
   }
 
-  :host, :host span{
+  :host, .contenedor-info{
     animation: slideInAnimation 1.0s ease forwards;
   }
   
@@ -178,6 +177,12 @@ p, h2{
     text-transform: capitalize;
 }
 
-span{
-  display: block;
+h3{
+  text-align: center;
+}
+
+.contenedor-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

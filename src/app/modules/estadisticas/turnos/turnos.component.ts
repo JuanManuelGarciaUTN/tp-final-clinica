@@ -221,20 +221,20 @@ export class TurnosComponent {
   
     faviconImage.onload = () => {
       html2canvas(graficoElement, options).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
+        const imgData = canvas.toDataURL('image/png',1);
   
         const imgProps = pdf.getImageProperties(imgData);
         const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        const pdfHeight = ((imgProps.height * pdfWidth) / imgProps.width)-20;
   
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.addImage(imgData, 'PNG', 0, 20, pdfWidth, pdfHeight);
         pdf.addImage(faviconImage, 'PNG', 10, 10, 16, 16);
   
         const currentDate = this.datePipe.transform(new Date(), 'd/M/YYYY HH:mm', '-0300');
         const text = "Gráfico Generado el: " + currentDate;
         const margin = 20;
         const textX = 2;
-        const textY = pdfHeight + margin;
+        const textY = pdfHeight + margin + 20;
         pdf.text(text, textX, textY);
   
         pdf.save(nombre + "-" + currentDate);

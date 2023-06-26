@@ -186,7 +186,7 @@ export class BaseDeDatosService {
 
   obtenerLogs(){
     const coleccion = collection(this.firestore, "logs");
-    const q = query(coleccion, orderBy("fecha", "desc"));
+    const q = query(coleccion, orderBy("fecha", "asc"));
     return collectionData(q, {idField: 'id'}) as Observable<Log[]>;
   }
 }

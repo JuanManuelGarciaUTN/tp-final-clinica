@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Estado, HistoriaClinica, Turno } from 'src/app/interfaces/turno';
+import { EstadoTurnoPipe } from 'src/app/pipes/estado-turno.pipe';
 import { BaseDeDatosService } from 'src/app/services/base-de-datos.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -10,7 +11,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-historial-turnos',
   templateUrl: './historial-turnos.component.html',
-  styleUrls: ['./historial-turnos.component.scss']
+  styleUrls: ['./historial-turnos.component.scss'],
+  providers: [EstadoTurnoPipe]
 })
 export class HistorialTurnosComponent {
 
@@ -33,7 +35,7 @@ export class HistorialTurnosComponent {
   public generandoHistoriaClinica = false;
   public historiaClinica?: HistoriaClinica;
 
-  constructor(private usuario: UsuarioService,private db: BaseDeDatosService){
+  constructor(private usuario: UsuarioService,private db: BaseDeDatosService, private estadoPipe: EstadoTurnoPipe){
     if(this.usuario.datos?.tipo == "admin"){
       this.subTurnos = this.db.obtenerTurnosAdmin().subscribe(turnos=>{
         this._turnos = turnos;
@@ -97,7 +99,8 @@ export class HistorialTurnosComponent {
     fecha.setHours(fecha.getHours() - 3);
     let fechaString = fecha.toISOString();
 
-    for(let dato of filtros){      
+    for(let dato of filtros){   
+      dato = dato.toLowerCase();   
       if(!turno.nombrePaciente.toLowerCase().includes(dato) &&
         !turno.nombreEspecialista.toLowerCase().includes(dato) &&
         !turno.dniPaciente.toLowerCase().includes(dato) &&
@@ -107,12 +110,13 @@ export class HistorialTurnosComponent {
         !turno.historiaClinica?.peso.toString().includes(dato) &&
         !turno.historiaClinica?.presionMax.toString().includes(dato) &&
         !turno.historiaClinica?.presionMin.toString().includes(dato) &&
-        !turno.historiaClinica?.dato1?.clave.includes(dato) &&
-        !turno.historiaClinica?.dato1?.valor.includes(dato) &&
-        !turno.historiaClinica?.dato2?.clave.includes(dato) &&
-        !turno.historiaClinica?.dato2?.valor.includes(dato) &&
-        !turno.historiaClinica?.dato3?.clave.includes(dato) &&
-        !turno.historiaClinica?.dato3?.valor.includes(dato) &&
+        !turno.historiaClinica?.dato1?.clave.toLowerCase().includes(dato) &&
+        !turno.historiaClinica?.dato1?.valor.toLowerCase().includes(dato) &&
+        !turno.historiaClinica?.dato2?.clave.toLowerCase().includes(dato) &&
+        !turno.historiaClinica?.dato2?.valor.toLowerCase().includes(dato) &&
+        !turno.historiaClinica?.dato3?.clave.toLowerCase().includes(dato) &&
+        !turno.historiaClinica?.dato3?.valor.toLowerCase().includes(dato) &&
+        !(this.estadoPipe.transform(turno.estado).toLowerCase().includes(dato)) &&
         !this.compararFecha(fechaString, dato)){
           return false;
       }
